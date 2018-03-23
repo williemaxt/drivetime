@@ -2,7 +2,7 @@
 
 
     if(isset($_POST['submit'])) {
-        $con = new mysqli('localhost','root','Encryptme!!!','drive_time');
+        $con = new mysqli('localhost','root','password','drive_time');
 
         $name = $con->real_escape_string($_POST['name']);
         $email = $con->real_escape_string($_POST['email']);
