@@ -1,3 +1,34 @@
+<?php
+
+
+if(isset($_POST['submit'])) {
+    $con = new mysqli('localhost','root','Encryptme!!!','drive_time');
+
+    $name = $con->real_escape_string($_POST['name']);
+    $email = $con->real_escape_string($_POST['email']);
+    $number = $con->real_escape_string($_POST['number']);
+    $password = $con->real_escape_string($_POST['password']);
+    $cPassword = $con->real_escape_string($_POST['cPassword']);
+
+
+    if ($password != $cPassword)
+        $msg = "Passwords do not match.";
+    else {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $con->query("INSERT INTO clients (name, email, number, password) VALUES ('$name', '$email', '$number', '$hash')");
+        $msg = "You have been registered!";
+
+        //ADD CLIENT DASHBOARD REDIRECT HERE...
+    }
+
+
+    //$sql = "INSERT INTO clients (name, email, number, password) VALUES ('$name', '$email', '$number', '$password');";
+    //mysqli_query($conn, $sql);
+    //take us back home after submission
+    // header("Location: allcode.php?commit=success");
+
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,21 +38,25 @@
       <link rel="stylesheet" href="css/forms.css">
   </head>
   <body>
-      <?php include 'connection.php'?>
+
       <br>
-      <form id="registerClientForm">
+      <form id="registerClientForm" method="post" action="clientRegister.php">
           <h1>Register To Use</h1>
           <p>Full Name</p>
-          <input type="text" name="regName">
+          <input type="text" minlength="3" name="name">
           <p>Email</p>
-          <input type="email" name="regEmail">
+          <input type="email" name="email">
           <p>Phone</p>
-          <input type="number" name="lgEmail">
+          <input type="number" name="number">
           <p>Business Name</p>
-          <input type="text" name="lgEmail">
+          <input type="text" name="bname">
           <p>Business Address</p>
-          <input type="address" name="lgEmail">
-          <input class="submitBtn" type="submit" value="Submit">
+          <input type="text" name="baddr">
+          <p>Password</p>
+          <input type="password" minlength="8" name="password">
+          <p>Confirm Password</p>
+          <input type="password" minlength="8" name="cPassword">
+          <input class="submitBtn" type="submit" name="submit" value="Submit">
       </form>
 
   </body>
