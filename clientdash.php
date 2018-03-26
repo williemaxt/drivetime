@@ -51,8 +51,9 @@ session_start();
         while($row = $result->fetch_assoc()) {
         echo '<div class="driver-card">
             <p>NAME: ' . $row['name'] . '</p>
-            <p>EXPERIENCE: ' . $row['name'] . '</p>
-            <p>Bio: ' . $row['name'] . '</p>
+            <p>STATE: ' . $row['state'] . '</p>
+            <p>CITY: ' . $row['city'] . '</p>
+            <p>EXPERIENCE: ' . $row['experience'] . ' YEARS</p>
             <p>Medical: ' . $row['name'] . '</p>
             <p>Crash Rep: ' . $row['name'] . '</p>
             <input type="submit" value="HIRE">
