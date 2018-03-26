@@ -6,6 +6,14 @@
     //variable to query the code
     //conn istaken from the connection file
     $result = mysqli_query($conn, $sql); 
+
+session_start();
+	if(!isset($_SESSION))
+    {
+        header('location:index.php');
+        exit;
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +27,6 @@
         
         <nav>
             <h1>Prodrivetime</h1>
-            <p><a href="#">Logout</a></p>
             <p>example@gmail.com</p>
             <p>John Doe</p>
         </nav>
@@ -58,7 +65,7 @@
             ?>
           
         </main>
-        
+        <a href="logout.php?logout=true" class="logout-link">Logout</a>
         </div>
     </body>
 </html>
