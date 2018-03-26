@@ -27,6 +27,7 @@ session_start();
         
         <nav>
             <h1>Prodrivetime</h1>
+	    <p><a href="logout.php?logout=true">Logout</a></p>
             <p>example@gmail.com</p>
             <p>John Doe</p>
         </nav>
@@ -66,7 +67,6 @@ session_start();
             ?>
           
         </main>
-        <a href="logout.php?logout=true" class="logout-link">Logout</a>
         </div>
     </body>
 </html>
