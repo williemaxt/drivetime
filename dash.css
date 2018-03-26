@@ -7,6 +7,7 @@ body{
     margin: 0px;
     background: #c0c0c0;
 }
+/*Navigation Bar Style*/
 nav{
     width: 100%;
     background: #eca217;
@@ -37,6 +38,7 @@ nav h1{
     margin-left: 10px;
     font-family: 'Acme', sans-serif;
 }
+/*Style for main that contains the driver cards*/
 main{
     width: 68%;
     background: #333333;
@@ -58,6 +60,7 @@ main h1{
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
+/*Aside(My Account Tab) style*/
 aside{
     width: 25%;
     background: #333333;
