@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reset Password</title>
+    <title>Driver Login</title>
     <link rel="stylesheet" href="css/forms.css">
 </head>
 <body>
