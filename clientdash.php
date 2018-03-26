@@ -37,51 +37,25 @@
             
         <main>
         <h1>Hire A Pro</h1>
-          <!--An example of a driver card that will show-->
-            <div class="driver-card">
-            <p>NAME:</p>
-            <p>EXPERIENCE:</p>
-            <p>Bio:</p>
-            <p>Medical:</p>
-            <p>Crash Rep:</p>
-                <input type="submit" value="HIRE">
-            </div>
             
-            <div class="driver-card">
-            <p>NAME:</p>
-            <p>EXPERIENCE:</p>
-            <p>Bio:</p>
-            <p>Medical:</p>
-            <p>Crash Rep:</p>
-                <input type="submit" value="HIRE">
-            </div>
-            
-            <div class="driver-card">
-            <p>NAME:</p>
-            <p>EXPERIENCE:</p>
-            <p>Bio:</p>
-            <p>Medical:</p>
-            <p>Crash Rep:</p>
-                <input type="submit" value="HIRE">
-            </div>
-            
-            <div class="driver-card">
-            <p>NAME:</p>
-            <p>EXPERIENCE:</p>
-            <p>Bio:</p>
-            <p>Medical:</p>
-            <p>Crash Rep:</p>
-                <input type="submit" value="HIRE">
-            </div>
-            
-            <div class="driver-card">
-            <p>NAME:</p>
-            <p>EXPERIENCE:</p>
-            <p>Bio:</p>
-            <p>Medical:</p>
-            <p>Crash Rep:</p>
-                <input type="submit" value="HIRE">
-            </div>
+    <?php
+        if ($result->num_rows > 0) {
+        // output data of each row in the database and displays it as a card
+        while($row = $result->fetch_assoc()) {
+        echo '<div class="driver-card">
+            <p>NAME: ' . $row['name'] . '</p>
+            <p>EXPERIENCE: ' . $row['name'] . '</p>
+            <p>Bio: ' . $row['name'] . '</p>
+            <p>Medical: ' . $row['name'] . '</p>
+            <p>Crash Rep: ' . $row['name'] . '</p>
+            <input type="submit" value="HIRE">
+            </div>';
+        }
+            } else {
+                echo "No Drivers Yet. Come back soon!";
+        }
+            $conn->close();
+            ?>
           
         </main>
         
