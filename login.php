@@ -3,15 +3,12 @@ require_once("connection.php");
 if(isset($_POST['submit'])){
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-
     $sql = "select * from clients where email = '".$email."'";
     $rs = mysqli_query($conn,$sql);
     $numRows = mysqli_num_rows($rs);
-
     if($numRows  == 1){
         $row = mysqli_fetch_assoc($rs);
         if(password_verify($password,$row['password'])){
-
             header('Location: clientdash.php');
         }
         else{
@@ -37,7 +34,7 @@ if(isset($_POST['submit'])){
     <input type="text" name="email" value="">
     <p>Password</p>
     <input type="password" name="password" value="">
-    <button type="submit" name="submit">Submit</button>
+    <input type="submit" name="submit" value="Login" class="submitBtn">
     <a style="text-align:center;" href="index.html"><p>Forgot Password?</p></a>
 </form>
 </body>
