@@ -80,8 +80,7 @@ aside h1{
     background: #3896b2;
     color: #ffffff;
     padding: 5px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-radius: 3px;
     font-family: 'Acme', sans-serif;
 }
 /*driver card style*/
@@ -105,4 +104,42 @@ aside h1{
 .driver-card input:hover{
     background: #333333;
     transition: .4s;
+}
+/*Mobile Queries*/
+@media screen and (max-width:800px){
+    aside{
+        float: none;
+        width: 92%;
+        margin: 0px auto;
+        margin-top: 20px;
+    }
+    main{
+        float: none;
+        width: 95%;
+        margin: 0px auto;
+        margin-top: 20px;
+    }
+    .driver-card{
+        width: 300px;
+    }
+}
+@media screen and (max-width:695px){
+    .driver-card{
+        width: 96%;
+    }
+}
+@media screen and (max-width:535px){
+    .driver-card{
+        width: 95%;
+    }
+}
+@media screen and (max-width:445px){
+    .driver-card{
+        width: 94%;
+    }
+}
+@media screen and (max-width:350px){
+    .driver-card{
+        width: 93%;
+    }
 }
