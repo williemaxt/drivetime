@@ -25,6 +25,16 @@
         </nav>
         <!--This is where the list of drivers will show-->
         <div class="wrapper">
+        <!--This section shows the clients account information-->
+        <aside>
+             <h1>My Account</h1>
+            <p>NAME:</p>
+            <p>EMAIL:</p>
+            <p>PHONE:</p>
+            <p>ADDRESS:</p>
+            
+        </aside>
+            
         <main>
         <h1>Hire A Pro</h1>
           <!--An example of a driver card that will show-->
@@ -74,15 +84,7 @@
             </div>
           
         </main>
-        <!--This section shows the clients account information-->
-        <aside>
-             <h1>My Account</h1>
-            <p>NAME:</p>
-            <p>EMAIL:</p>
-            <p>PHONE:</p>
-            <p>ADDRESS:</p>
-            
-        </aside>
+        
         </div>
     </body>
 </html>
