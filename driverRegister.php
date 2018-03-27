@@ -15,11 +15,10 @@
         if ($password != $cPassword)
         $msg = "Passwords do not match.";
         else {
-            $hash = password_hash($password, PASSWORD_BCRYPT);
+            $hash = password_hash($password, PASSWORD_DEFAULT);
             $con->query("INSERT INTO drivers (name, email, number, password, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$medical', '$crash_report')");
             $msg = "You have been registered!";
 
-            //ADD DASHBOARD REDIRECT HERE...
     }
 
 
