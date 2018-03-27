@@ -10,7 +10,7 @@
       <form id="resetForm">
           <h1>Reset Password</h1>
           <p>Email</p>
-          <input type="text" name="fprgotEmail">
+          <input type="text" name="forgotEmail">
           <input class="submitBtn" type="submit" value="Login">
       </form>
 
