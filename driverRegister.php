@@ -49,6 +49,8 @@
           <input type="email" name="email">
           <p>Password</p>
           <input type="password" name="password">
+          <p>Confirm Password</p>
+          <input type="password" minlength="8" name="cPassword">
           <p>Phone</p>
           <input type="number" name="number">
           <p>CDL #</p>
