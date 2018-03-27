@@ -2,7 +2,7 @@
 
 
 if(isset($_POST['submit'])) {
-    $con = new mysqli('localhost','root','password','drive_time');
+    $con = new mysqli('localhost','root','Encryptme!!!','drive_time');
 
     $name = $con->real_escape_string($_POST['name']);
     $email = $con->real_escape_string($_POST['email']);
@@ -14,11 +14,9 @@ if(isset($_POST['submit'])) {
     if ($password != $cPassword)
         $msg = "Passwords do not match.";
     else {
-        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $hash = password_hash($password, PASSWORD_DEFAULT);
         $con->query("INSERT INTO clients (name, email, number, password) VALUES ('$name', '$email', '$number', '$hash')");
         $msg = "You have been registered!";
-
-        //ADD CLIENT DASHBOARD REDIRECT HERE...
     }
 
 
