@@ -40,7 +40,7 @@
   <body>
       <br>
       <?php if ($msg != "")echo $msg . "<br><br>" ?>
-    <form id="registerDriverForm" method="post" action="driverRegister.php" encytpe="multipart/form-data">
+    <form id="registerDriverForm" method="post" action="driverRegister.php" enctype="multipart/form-data">
           <h1>Register To Drive</h1>
           <p>Full Name</p>
           <input type="text" name="name">
