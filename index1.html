@@ -1,9 +1,11 @@
-<?php require_once('./config.php'); ?>
-
-<form action="charge.php" method="post">
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<?php echo $stripe['publishable_key']; ?>"
-            data-description="Access for a year"
-            data-amount="5000"
-            data-locale="auto"></script>
+<form action="charge.php" method="POST">
+    <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_SF7SVH5ZE1Q3snDwNfCrAoWg"
+            data-amount="20000"
+            data-name="DriveTime"
+            data-description="Widget"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto">
+    </script>
 </form>
