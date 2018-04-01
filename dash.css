@@ -5,7 +5,8 @@
 }
 body{
     margin: 0px;
-    background: #c0c0c0;
+    background: #ffffff;
+    background-image: url("../images/background.png");
 }
 /*Navigation Bar Style*/
 nav{
@@ -52,6 +53,7 @@ main{
     font-family: 'Acme', sans-serif;
     border-radius: 3px;
     margin-top: 20px;
+    box-shadow: 0px 10px 40px 1px #888888;
 }
 main h1{
     margin: 0;
@@ -70,6 +72,7 @@ aside{
     margin-right: 10px;
     border-radius: 3px;
     margin-top: 20px;
+    box-shadow: 0px 10px 40px 1px #888888;
 }
 aside p{
     color: #ffffff;
