@@ -91,6 +91,10 @@ footer ul li{
   padding-left: 1%;
   padding-right: 1%;
 }
+nav a {
+  text-decoration: none;
+  color: #ffffff;
+}
 #imgHome{
   background-image: url(../images/machine.jpg);
   background-size:cover;
