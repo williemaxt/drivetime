@@ -6,11 +6,11 @@
     //variable to query the code
     //conn istaken from the connection file
     $result = mysqli_query($conn, $sql); 
-
-session_start();
+    
+    session_start();
 	if(!isset($_SESSION))
     {
-        header('location:index.php');
+        header('Location:index.php');
         exit;
     }
 
@@ -27,7 +27,7 @@ session_start();
         
         <nav>
             <h1>Prodrivetime</h1>
-	    <p><a href="logout.php?logout=true">Logout</a></p>
+            <p><a href="logout.php?logout=true">Logout</a></p>
             <p>example@gmail.com</p>
             <p>John Doe</p>
         </nav>
@@ -55,8 +55,8 @@ session_start();
             <p>STATE: ' . $row['state'] . '</p>
             <p>CITY: ' . $row['city'] . '</p>
             <p>EXPERIENCE: ' . $row['experience'] . ' YEARS</p>
-            <p>Medical: ' . $row['name'] . '</p>
-            <p>Crash Rep: ' . $row['name'] . '</p>
+            <p>Medical: <a href="driverDocs/' . $row['medical'] . '">View</a></p>
+            <p>Crash Rep: <a href="driverDocs/' . $row['crash_report'] . '">View</a></p>
             <input type="submit" value="HIRE">
             </div>';
         }
