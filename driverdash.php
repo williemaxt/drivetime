@@ -1,12 +1,14 @@
 <?php
       include_once 'connection.php';
+      $currentUser = "God@gmail.com";
     //write an sql statement to pull all information from table
       $sql  = 'SELECT * FROM `clients`';
       //the query will look for users with that email and display their information on the dashboard
-      $sql1 = 'SELECT * FROM `drivers` WHERE email = "God@gmail.com"';
+      $sql1 = 'SELECT * FROM `drivers` WHERE email = "williemaxt@gmail.com" ';
     //variable to query the code
     //conn is taken from the connection file
     $result = mysqli_query($conn, $sql);
+    //variable for displaying the current users information
     $result1 = mysqli_query($conn, $sql1);
     session_start();
 	if(!isset($_SESSION))
@@ -26,15 +28,15 @@
   
     <body>
         
-        <nav>
+        <nav id="navbar">
             <h1>Prodrivetime</h1>
             <p><a href="logout.php?logout=true">Logout</a></p>
             <!--the php snippet below echos the account information of the person logged in-->
             <?php
              if($result1->num_rows > 0){
                  $row1 = $result1->fetch_assoc();
-                     echo '<p> ' . $row1['email'] . '</p>
-                     <p>' . $row1['name'] . '</p>';
+                     echo '<p id="dashEmail"> ' . $row1['email'] . '</p>
+                     <p id="dashName">' . $row1['name'] . '</p>';
              }else{
                  echo 'We cant seem to pull your info';
              }
@@ -82,4 +84,5 @@
         </main>
         </div>
     </body>
+    <script src="js/dash.js"></script>
 </html>
