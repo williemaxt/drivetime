@@ -1,15 +1,23 @@
 <?php
       include_once 'connection.php';
-    //write an sql statement to pull all information from table
-   // $sql = "SELECT * FROM code;";
-      $sql  = 'SELECT * FROM `drivers`';
+
     //the query will look for users with that email and display their information on the dashboard
-    $sql1 = 'SELECT * FROM `clients` WHERE email = "God@email.com" ';
+    $sql1 = 'SELECT * FROM `clients` WHERE email = "new@new.com" ';
+    //THIS WILL RUN THE SEARCH OPERATION
+    if(empty($_POST['keyword'])){
+
+    $sql  = 'SELECT * FROM `drivers`';
+
+    }elseif(isset($_POST['keyword'])){
+        $search = $_POST['keyword'];
+        $sql = "SELECT * FROM `drivers` WHERE state LIKE '$search' ";
+    }
     //variable to query the code
-    //conn istaken from the connection file
+    //conn is taken from the connection file
     $result = mysqli_query($conn, $sql);
     //variable for displaying the current users information
     $result1 = mysqli_query($conn, $sql1);
+
     session_start();
 	if(!isset($_SESSION))
     {
@@ -67,12 +75,18 @@
         <!--Main content-->
         <main>
         <h1>Hire A Pro</h1>
-            <!--Search bar-->
-            <div class="searchBar">
-                <input type="text" placeholder="Search..">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </div>
+            <!--Search bar logic-->
+            <?php
+                echo $sql;
+            ?>
+            <!--Searchbar elements-->
+            <form class="searchBar" method="post" action="clientdash.php">
+                <input type="text" name="keyword" placeholder="Search..">
+                <button type="submit" name="submit"><i class="fa fa-search"></i></button>
+            </form>
             <br>
+
+            <!--List of normal AND SEARCH Results-->
     <?php
         if ($result->num_rows > 0) {
         // output data of each row in the database and displays it as a card
@@ -88,7 +102,7 @@
             </div>';
         }
             } else {
-                echo "No Drivers Yet. Come back soon!";
+                echo "No Drivers In $search Yet. Come back soon!";
         }
             $conn->close();
             ?>
