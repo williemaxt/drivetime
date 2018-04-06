@@ -4,6 +4,7 @@
     //the query will look for users with that email and display their information on the dashboard
     $sql1 = 'SELECT * FROM `clients` WHERE email = "new@new.com" ';
     //THIS WILL RUN THE SEARCH OPERATION
+    //Search bar logic
     if(empty($_POST['keyword'])){
 
     $sql  = 'SELECT * FROM `drivers`';
@@ -37,15 +38,15 @@
   
     <body>
         
-        <nav>
+        <nav id="navbar">
             <h1>Prodrivetime</h1>
             <p><a href="logout.php?logout=true">Logout</a></p>
             <!--the php snippet below echos the account information of the person logged in-->
             <?php
             if($result1->num_rows > 0){
                 $row1 = $result1->fetch_assoc();
-                echo '<p> ' . $row1['email'] . '</p>
-                     <p>' . $row1['name'] . '</p>';
+                echo '<p id="dashEmail"> ' . $row1['email'] . '</p>
+                     <p id="dashName">' . $row1['name'] . '</p>';
             }else{
                 echo 'We cant seem to pull your info';
             }
@@ -75,13 +76,9 @@
         <!--Main content-->
         <main>
         <h1>Hire A Pro</h1>
-            <!--Search bar logic-->
-            <?php
-                echo $sql;
-            ?>
             <!--Searchbar elements-->
             <form class="searchBar" method="post" action="clientdash.php">
-                <input type="text" name="keyword" placeholder="Search..">
+                <input type="text" name="keyword" placeholder="Search by State ex.(PA)">
                 <button type="submit" name="submit"><i class="fa fa-search"></i></button>
             </form>
             <br>
@@ -96,8 +93,8 @@
             <p>STATE: ' . $row['state'] . '</p>
             <p>CITY: ' . $row['city'] . '</p>
             <p>EXPERIENCE: ' . $row['experience'] . ' YEARS</p>
-            <p>Medical: <a href="driverDocs/' . $row['medical'] . '">View</a></p>
-            <p>Crash Rep: <a href="driverDocs/' . $row['crash_report'] . '">View</a></p>
+            <p>Medical: <a href="driverDocs/' . $row['medical'] . '" target="_blank">View</a></p>
+            <p>Crash Rep: <a href="driverDocs/' . $row['crash_report'] . '" target="_blank">View</a></p>
             <input type="submit" value="HIRE">
             </div>';
         }
@@ -110,4 +107,5 @@
         </main>
         </div>
     </body>
+    <script src="js/dash.js"></script>
 </html>
