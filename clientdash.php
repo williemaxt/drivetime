@@ -3,10 +3,13 @@
     //write an sql statement to pull all information from table
    // $sql = "SELECT * FROM code;";
       $sql  = 'SELECT * FROM `drivers`';
+    //the query will look for users with that email and display their information on the dashboard
+    $sql1 = 'SELECT * FROM `clients` WHERE email = "God@email.com" ';
     //variable to query the code
     //conn istaken from the connection file
-    $result = mysqli_query($conn, $sql); 
-    
+    $result = mysqli_query($conn, $sql);
+    //variable for displaying the current users information
+    $result1 = mysqli_query($conn, $sql1);
     session_start();
 	if(!isset($_SESSION))
     {
@@ -21,6 +24,7 @@
     <meta charset="utf-8">
     <title>Drive Time</title>
     <link rel="stylesheet" href="css/dash.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   
     <body>
@@ -28,24 +32,47 @@
         <nav>
             <h1>Prodrivetime</h1>
             <p><a href="logout.php?logout=true">Logout</a></p>
-            <p>example@gmail.com</p>
-            <p>John Doe</p>
+            <!--the php snippet below echos the account information of the person logged in-->
+            <?php
+            if($result1->num_rows > 0){
+                $row1 = $result1->fetch_assoc();
+                echo '<p> ' . $row1['email'] . '</p>
+                     <p>' . $row1['name'] . '</p>';
+            }else{
+                echo 'We cant seem to pull your info';
+            }
+
+            ?>
         </nav>
         <!--This is where the list of drivers will show-->
         <div class="wrapper">
         <!--This section shows the clients account information-->
         <aside>
              <h1>My Account</h1>
-            <p>NAME:</p>
-            <p>EMAIL:</p>
-            <p>PHONE:</p>
-            <p>ADDRESS:</p>
+            <?php
+            if($result1->num_rows > 0){
+                echo '
+                <p>NAME: ' . $row1['name'] . '</p>
+                <p>EMAIL: ' . $row1['email'] . '</p>
+                <p>PHONE: ' . $row1['number'] . '</p>
+                <p>BUSINESS: ' . $row1['bname'] . '</p>';
+            }else{
+                echo 'We cant seem to pull your info';
+            }
+            ?>
             
         </aside>
-            
+
+
+        <!--Main content-->
         <main>
         <h1>Hire A Pro</h1>
-            
+            <!--Search bar-->
+            <div class="searchBar">
+                <input type="text" placeholder="Search..">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+
     <?php
         if ($result->num_rows > 0) {
         // output data of each row in the database and displays it as a card
@@ -65,7 +92,7 @@
         }
             $conn->close();
             ?>
-          
+
         </main>
         </div>
     </body>
