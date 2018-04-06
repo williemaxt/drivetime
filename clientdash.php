@@ -72,7 +72,7 @@
                 <input type="text" placeholder="Search..">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </div>
-
+            <br>
     <?php
         if ($result->num_rows > 0) {
         // output data of each row in the database and displays it as a card
