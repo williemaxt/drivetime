@@ -1,22 +1,21 @@
 <?php
+      session_start();
       include_once 'connection.php';
-      $currentUser = "God@gmail.com";
-    //write an sql statement to pull all information from table
-      $sql  = 'SELECT * FROM `clients`';
-      //the query will look for users with that email and display their information on the dashboard
-      $sql1 = 'SELECT * FROM `drivers` WHERE email = "williemaxt@gmail.com" ';
+      if(!isset($_SESSION))
+      {
+          header('Location:index.php');
+          exit;
+      }
+    //this pulls the username(email) saved in the session to put into the sql query
+      $username = $_SESSION['username'];
+    //the query will look for users with that email and display their information on the dashboard
+    $sql1 = "SELECT * FROM `drivers` WHERE email = '$username' ";
     //variable to query the code
+    $sql  = 'SELECT * FROM `clients`';
     //conn is taken from the connection file
     $result = mysqli_query($conn, $sql);
     //variable for displaying the current users information
     $result1 = mysqli_query($conn, $sql1);
-    session_start();
-	if(!isset($_SESSION))
-    {
-        header('Location:index.php');
-        exit;
-    }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,9 +24,9 @@
     <title>Drive Time</title>
     <link rel="stylesheet" href="css/dash.css">
   </head>
-  
+
     <body>
-        
+
         <nav id="navbar">
             <h1>Prodrivetime</h1>
             <p><a href="logout.php?logout=true">Logout</a></p>
@@ -60,10 +59,10 @@
             }
             ?>
         </aside>
-            
+
         <main>
         <h1>Your Requests</h1>
-            
+
             <?php
                 if ($result->num_rows > 0) {
                  // output data of each row in the database and displays it as a card
@@ -80,7 +79,7 @@
             }
             $conn->close();
             ?>
-          
+
         </main>
         </div>
     </body>
