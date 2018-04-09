@@ -1,7 +1,10 @@
 <?php
+session_start();
 require_once("connection.php");
 if(isset($_POST['submit'])){
     $email = trim($_POST['email']);
+    //this saves our email address in the session
+    $_SESSION['username'] = $email;
     $password = trim($_POST['password']);
     $sql = "select * from clients where email = '".$email."'";
     $rs = mysqli_query($conn,$sql);
@@ -10,6 +13,7 @@ if(isset($_POST['submit'])){
         $row = mysqli_fetch_assoc($rs);
         if(password_verify($password,$row['password'])){
             header('Location: clientdash.php');
+            exit();
         }
         else{
             echo "Either your email or password are incorrect. Please try again.";
