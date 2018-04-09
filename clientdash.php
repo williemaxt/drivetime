@@ -1,14 +1,19 @@
 <?php
+      session_start();
       include_once 'connection.php';
-
+      if(!isset($_SESSION))
+      {
+          header('Location:index.php');
+          exit;
+      }
+    //this pulls the username(email) saved in the session to put into the sql query
+      $username = $_SESSION['username'];
     //the query will look for users with that email and display their information on the dashboard
-    $sql1 = 'SELECT * FROM `clients` WHERE email = "new@new.com" ';
+    $sql1 = "SELECT * FROM `clients` WHERE email = '$username' ";
     //THIS WILL RUN THE SEARCH OPERATION
     //Search bar logic
     if(empty($_POST['keyword'])){
-
     $sql  = 'SELECT * FROM `drivers`';
-
     }elseif(isset($_POST['keyword'])){
         $search = $_POST['keyword'];
         $sql = "SELECT * FROM `drivers` WHERE state LIKE '$search' ";
@@ -18,14 +23,6 @@
     $result = mysqli_query($conn, $sql);
     //variable for displaying the current users information
     $result1 = mysqli_query($conn, $sql1);
-
-    session_start();
-	if(!isset($_SESSION))
-    {
-        header('Location:index.php');
-        exit;
-    }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,9 +32,7 @@
     <link rel="stylesheet" href="css/dash.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  
     <body>
-        
         <nav id="navbar">
             <h1>Prodrivetime</h1>
             <p><a href="logout.php?logout=true">Logout</a></p>
@@ -50,7 +45,6 @@
             }else{
                 echo 'We cant seem to pull your info';
             }
-
             ?>
         </nav>
         <!--This is where the list of drivers will show-->
@@ -69,10 +63,7 @@
                 echo 'We cant seem to pull your info';
             }
             ?>
-            
         </aside>
-
-
         <!--Main content-->
         <main>
         <h1>Hire A Pro</h1>
@@ -82,7 +73,6 @@
                 <button type="submit" name="submit"><i class="fa fa-search"></i></button>
             </form>
             <br>
-
             <!--List of normal AND SEARCH Results-->
     <?php
         if ($result->num_rows > 0) {
@@ -103,7 +93,6 @@
         }
             $conn->close();
             ?>
-
         </main>
         </div>
     </body>
