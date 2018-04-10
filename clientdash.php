@@ -23,6 +23,16 @@
     $result = mysqli_query($conn, $sql);
     //variable for displaying the current users information
     $result1 = mysqli_query($conn, $sql1);
+    //transactions in sql. records current user email, driver email, token, and a current timestamp (Y-m-d h:i:s).
+
+   $driveremail = $_POST['driveremail'];
+   $token = $_POST['token'];
+   $timestamp = $_POST['timestamp'];
+   $timestamp = date("Y-m-d h:i:s");
+
+//inserting into sql.
+
+   $sql = "INSERT INTO transactions (client_email, driver_email, token, timestamp) VALUES ('$username', '$driveremail', '$token','$timestamp');";
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,7 +89,7 @@
         // output data of each row in the database and displays it as a card
         while($row = $result->fetch_assoc()) {
         echo '<div class="driver-card">
-            <p>NAME: ' . $row['name'] . '</p>
+            <h1>' . $row['name'] . '</h1>
             <p>STATE: ' . $row['state'] . '</p>
             <p>CITY: ' . $row['city'] . '</p>
             <p>EXPERIENCE: ' . $row['experience'] . ' YEARS</p>
