@@ -118,6 +118,16 @@ aside h1{
     background: #333333;
     transition: .4s;
 }
+.driver-card h1{
+    color: #ffffff;
+}
+.driver-card h2{
+    color: #008141;
+    text-align: center;
+}
+.driver-card p{
+    font-size: 1.1em;
+}
 /*Mobile Queries*/
 @media screen and (max-width:800px){
     aside{
