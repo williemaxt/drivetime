@@ -11,7 +11,7 @@
     //the query will look for users with that email and display their information on the dashboard
     $sql1 = "SELECT * FROM `drivers` WHERE email = '$username' ";
     //variable to query the code
-    $sql  = 'SELECT * FROM `clients`';
+    $sql  = "SELECT * FROM `transactions` WHERE driver_email = '$username' ";
     //conn is taken from the connection file
     $result = mysqli_query($conn, $sql);
     //variable for displaying the current users information
@@ -68,9 +68,10 @@
                  // output data of each row in the database and displays it as a card
                 while($row = $result->fetch_assoc()) {
                 echo '<div class="driver-card">
-                <p>NAME: ' . $row['name'] . '</p>
-                <p>BUSINESSES: ' . $row['bname'] . '</p>
-                <p>ADDRESS: ' . $row['baddr'] . '</p>
+                <h1>' . $row['business'] . '</h1>
+                <p>NAME: ' . $row['client_name'] . '</p>
+                <p>DETAILS: ' . $row['details'] . '</p>
+                <h2>$ ' . $row['amount_offered'] . '</h2>
                 <input type="submit" name="accept" value="ACCEPT">
                 </div>';
                     }
