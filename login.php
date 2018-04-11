@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
     <p>Password</p>
     <input type="password" name="password" value="">
     <input type="submit" name="submit" value="Login" class="submitBtn">
-    <a style="text-align:center;" href="index.html"><p>Forgot Password?</p></a>
+    <a style="text-align:center;" href="forgotPassword.php"><p>Forgot Password?</p></a>
 </form>
 </body>
 </html>
