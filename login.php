@@ -33,7 +33,7 @@ if(isset($_POST['submit'])){
 <body>
 <br>
 <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-    <h1>Login</h1>
+    <h1>Client Login</h1>
     <p>Email</p>
     <input type="text" name="email" value="">
     <p>Password</p>
