@@ -1,164 +1,408 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Drive Time</title>
-    <link rel="stylesheet" href="css/main.css">
-  </head>
-  <body>
-    <!--Navigation menu-->
-    <header>
-        <div id="burger" class="burger-nav">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-      <nav id="navbar">
-          <h3 id="logoName">Prodrivetime</h3>
-        <ul>
-          <li><a>Home</a></li>
-          <li><a href="clientRegister.php">Clients</a></li>
-          <li><a href="driverRegister.php">Drivers</a></li>
-          <li><a>Info</a></li>
-          <li><a href="chooseAccess.php">Login</a></li>
-        </ul>
-      </nav>
-    </header>
+@import url('https://fonts.googleapis.com/css?family=Nunito|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Megrim');
+/*
+red: #C11218
+grey: #808080
+black: #1c040c
+font-family: 'Nunito', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+*/
 
-    <div id="imgHome"class="imgHeader">
-      <div class="imgText">
-        <h1>Pro Drive Time</h1>
-        <p>Professional drivers at a moments notice</p>
-        <button class="button" name="button">Learn More</button>
-      </div>
 
-    </div>
 
-<div id="homeBar" class="bar">
-  <ul>
-    <li><p>Drive Today! >></p></li>
-    <li><button class="transparent-button">Sign Up</button></li>
-  </ul>
+.burger-nav{
+  display: block;
+  height: 40px;
+  width: 30px;
+  float: right;
+  cursor: pointer;
+}
+#burger div{
+  width: 35px;
+  height: 5px;
+  background: #ffffff;
+  margin: 5px;
+}
+#burger{
+  float: right;
+  margin: 10px;
+  margin-right: 20px;
+  visibility: hidden;
+}
 
-</div>
-    <!--Wrapper for properly formating content-->
-<div class="wrapper">
-  <main>
-    <ul class="iconUl">
-      <li><img src="images/id-card.svg">
-      <h1>Commercial Drivers</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
-    </li>
 
-    <li><img src="images/shipped.svg">
-    <h1>Special Liscenses</h1>
-    <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
-  </li>
 
-  <li><img src="images/signing-the-contract.svg">
-  <h1>Your Contractor</h1>
-  <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
-</li>
+/*Classes for UI Elements*/
+.button{
+  border: 2px solid #ffffff;
+  background: #eca217;
+  color: #ffffff;
+  height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  font-size: 2em;
+}
+.button:hover{
+  background: #ffffff;
+  color: #eca217;
+}
+.transparent-button{
+  border: 2px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  font-size: .5em;
+  margin-bottom: 10px;
+}
+.transparent-button:hover{
+  color: #eca217;
+  background: #ffffff;
+}
+/*CSS for Web Pages*/
+.wrapper{
+  width: 80%;
+  background: transparent;
+  margin: 0px auto;
+  margin-top: 10px;
+}
+#logoName{
+  font-size: 2.5em;
+  margin: 0;
+}
+body{
+  margin: 0px;
+  background: #ffffff;
+}
+header{
+  background: #3896b2;
+  min-height: 85px;
+  font-weight: bold;
+}
+#logoName{
+  font-family: 'Megrim', cursive;
+  color: #ffffff;
+}
+nav{
+  height: 100%;
+}
+nav ul{
+  list-style: none;
+  margin: 0px;
+  width: 100%;
+  padding: 0;
+  height: 100%;
+}
+nav ul li{
+  display: inline-block;
+  padding: 32px;
+  color: #ffffff;
+  font-family: 'Ubuntu', sans-serif;
+}
+nav ul li:hover{
+  border-bottom: 6px solid #ffffff;
+  transition: .4s;
+}
+footer{
+  background: #333333;
+  margin: 0px auto;
+  color: #ffffff;
+}
+footer ul{
+  list-style: none;
+  padding: 0;
+  margin:0;
+}
+footer ul li{
+  margin: 0;
+  width: 30%;
+  display: inline-block;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+nav a {
+  text-decoration: none;
+  color: #ffffff;
+}
+#imgHome{
+  background-image: url(../images/machine.jpg);
+  background-size:cover;
+  background-color: #000000; // Tint
+  background-blend-mode: multiply;
+}
+.imgText h1{
+  opacity: 1;
+}
+.imgHeader{
+  height: 600px;
+  text-align: center;
+}
+.imgHeader h1{
+  margin: 0px;
+  padding-top: 200px;
+  font-size: 5em;
+  font-family: 'Ubuntu', sans-serif;
+  color: #ffffff;
+}
+.imgHeader p{
+  font-size: 2.5em;
+  color: #ffffff;
+  font-family: 'Nunito', sans-serif;
+}
+.bar{
+  width: 100%;
+  min-height: 120px;
+  background: #3896b2;
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+}
+.bar ul{
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 20px;
+  color: #ffffff;
+}
+.bar ul li{
+  display: inline-block;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+#homeBar ul li p{
+  font-weight: bold;
+}
+#homeBar ul{
+  padding: 0;
+}
+main{
+  float: left;
+  width: 70%;
+  color: #808080;
+  padding: 10px;
+}
+.iconUl{
+  list-style: none;
+  margin: 0px auto;
+  padding: 0;
+}
+.iconUl li{
+  width: 47%;
+  display: inline-block;
+  padding: 10px;
+}
+.iconUl li img{
+  width: 70px;
+  height: auto;
+}
+aside{
+  float: right;
+  width: 25%;
+  color: #808080;
+  padding: 10px;
+}
+.aside img{
+  width: 100%;
+  border-radius: 3px;
+}
+.aside input{
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  border: none;
+  background: #808080;
+  font-size: 1.7em;
+  color: #ffffff;
+}
+.aside textarea{
+  margin: 0px auto;
+  width: 99%;
+  height: 80px;
+  border-radius: 3px;
+  border: none;
+  background: #808080;
+  font-size: 1.7em;
+  color: #ffffff;
+}
+.aside button{
+  width: 100%;
+  border: none;
+}
 
-<li><img src="images/payment-method.svg">
-<h1>Hire On Short Notice</h1>
-<p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
-</li>
-    </ul>
-  </main>
+#secondBar{
+  clear: both;
+  background: #808080;
+  font-family: 'Ubuntu', sans-serif;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+#secondBar ul h1{
+  font-size: 1em;
+}
+#secondBar p{
+  font-size: .6em;
+}
+#secondBar ul{
+  list-style: none;
+  padding: 0;
+}
+#secondBar img{
+  width: 100%;
+}
+#secondBar li{
+  width: 20%;
+  display: inline-block;
+  font-size: 1em;
+  background: #ffffff;
+  padding: 10px;
+  color: #808080;
+  min-height: 500px;
+  margin-top: 0px;
+}
+#secondBar section{
+  width: 100%
+}
+.prompt{
+  text-align: center;
+  color: #808080;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0;
+}
+#testimonies{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+}
+#testimonies ul{
+  list-style: none;
+  margin:0px auto;
+  width: 90%;
+  padding: 0;
+  padding-top: 40px;
+}
+#testimonies li{
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+  color: #808080;
+  padding-left: 6.5%;
+  padding-right: 6.5%;
+}
+#testimonies img{
+  width: 70px;
+}
+#imgHomeBottom{
+  background-image: url(../images/top_down.jpg);
+  margin-bottom: 0px;;
+}
+.footerBottom{
+  text-align: center;
+  margin: 0;
+  padding: 8px;;
+  color: #ffffff;
+  background: #262626;
+  margin-top: 10px;
+}
+#bottomLine{
+  height: 15px;
+  background: #3896b2;
+  padding: 0;
+  margin:0;
+  margin-bottom: -10px;
+}
 
-  <aside class="aside">
-    <h1>We Would Love To Hear From You!</h1>
-    <img src="images/worker.jpg" alt="">
-    <h1>Contact Us!</h1>
-    <input type="text" name="" placeholder="Name">
-    <input type="text" name="" placeholder="Email">
-    <input type="text" name="" placeholder="000-000-0000">
-    <textarea name="name" rows="8" cols="80"></textarea>
-    <button class="button" name="button">Submit</button>
-  </aside>
-</div> <!--End of the wrapper-->
-<div id="secondBar" class="bar">
-  <ul>
-    <li><section>
-      <img src="images/worker.jpg" alt="">
-      <h1>What Our Goals Are</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
-    </section></li>
+@media screen and (max-width:1330px){
+  main{
+    float: none;
+    width: 100%;
+  }
+  .iconUl{
+  }
+  .iconUl li{
+    width: 47%;
+  }
+  .aside{
+    float: none;
+    width: 80%;
+    margin: 0px auto;
+  }
+  #secondBar ul{
+    display: block;
+  }
+  #secondBar ul li{
+    width: 300px;
+    margin-top: 15px;
+  }
 
-    <li><section>
-      <img src="images/worker.jpg" alt="">
-      <h1>What Our Goals Are</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
-    </section></li>
+}
 
-    <li><section>
-      <img src="images/worker.jpg" alt="">
-      <h1>What Our Goals Are</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
-    </section></li>
-  </ul>
-</div>
-<div id="testimonies" class="wrapper"><!--Wrapper for the rest of the page-->
-<h3 class="prompt">This Is What People Say About Us</h3>
-<ul id="reviews">
-  <li>
-    <img src="images/man-user.svg" alt="">
-    <h1>Marcelle</h1>
-    <p>"This is one of the best companies I have ever contracted. Would easily give them 5 stars"</p>
-  </li>
-  <li>
-    <img src="images/man-user.svg" alt="">
-    <h1>Marcelle</h1>
-    <p>"This is one of the best companies I have ever contracted. Would easily give them 5 stars"</p>
-  </li>
-  <li>
-    <img src="images/man-user.svg" alt="">
-    <h1>Marcelle</h1>
-    <p>"This is one of the best companies I have ever contracted. Would easily give them 5 stars"</p>
-  </li>
-</ul>
-</div><!--End of the second wrapper-->
-<div id="homeBar" class="bar">
-  <ul>
-    <li><p>Hire Today! >></p></li>
-    <li><button class="transparent-button">Sign up</button></li>
-  </ul>
-</div>
-<div id="imgHomeBottom"class="imgHeader">
-  <div class="imgText">
-    <h1>See How We Work</h1>
-    <p>Check Out These Examples</p>
-    <button class="button" name="button">See Pictures</button>
-  </div>
-</div>
-<div id="bottomLine"></div>
-<footer>
-  <div class="wrapper">
-    <ul>
-      <li>
-        <h1>About Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
-      </li>
-      <li>
-        <h1>Follow Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
-      </li>
-      <li>
-        <h1>Follow Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
-      </li>
-      <li>
-        <h1>Follow Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
-      </li>
-    </ul>
-  </div>
-<div class="footerBottom">
- <p>&copy; Drive Time 2018. All Rights Reserved. Developed By 611 Solutions, LLC</p>
-</div>
-</footer>
-  </body>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="js/index.js"></script>
-</html>
+
+
+@media screen and (max-width:928px){
+  #secondBar ul li{
+    width: 80%;
+    margin-top: 15px;
+    margin: 0;
+  }
+  .iconUl li{
+    width: 45%;
+  }
+}
+
+@media screen and (max-width:770px){
+  #burger{
+    visibility: visible;
+  }
+  nav ul{
+    list-style: none;
+    overflow: hidden;
+    height: 0;
+    margin: 0px auto;
+    width: 100%;
+    transition: 1s;
+  }
+  nav ul.open{
+    height: auto;
+    margin: 0px auto;
+    padding-top: 40px;
+    transition: 1s;
+  }
+
+  #secondBar ul li{
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin: 0;
+  }
+  .iconUl li{
+    width: 300px;
+  }
+  #reviews li{
+    display: inline;
+    width: 300px;
+    margin: 0px auto;
+  }
+  #reviews li img{
+    margin: 0px auto;
+    width: 200px;
+  }
+}
+@media screen and (max-width:605px){
+
+}
+@media screen and (max-width:400px){
+  .imgHeader h1{
+    margin: 0px;
+    padding-top: 100px;
+    font-size: 3em;
+  }
+  .imgHeader p {
+    font-size: 2em;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
+  }
+}
