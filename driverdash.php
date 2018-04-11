@@ -16,6 +16,20 @@
     $result = mysqli_query($conn, $sql);
     //variable for displaying the current users information
     $result1 = mysqli_query($conn, $sql1);
+    //this will update theusers information on the database
+    if(isset($_POST['submitDriverUpdate'])){
+        $con = new mysqli('localhost','root','ogbytheoz','drive_time_test');
+
+        $name = $con->real_escape_string($_POST['name']);
+        $email = $con->real_escape_string($_POST['email']);
+        $number = $con->real_escape_string($_POST['number']);
+        $cdl = $con->real_escape_string($_POST['cdl']);
+        $city = $con->real_escape_string($_POST['city']);
+        $experience = $con->real_escape_string($_POST['experience']);
+        $state = $con->real_escape_string($_POST['state']);
+
+        $con->query(" UPDATE drivers SET name = $name, number = $number, cdl = $cdl, city = $city, experience = $experience, state = $state WHERE email = $username");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -138,7 +152,7 @@
                             <option value="WI">Wisconsin</option>
                             <option value="WY">Wyoming</option>
                         </select>
-                        <input class="submitBtn" type="submit" name="submit" value="submit">
+                        <input class="submitBtn" type="submit" name="submitDriverUpdate" value="submit">
                         <br>
                     </form>
                 </div>
