@@ -88,15 +88,15 @@
                     <form id=" " method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
                         <h1>Update Account</h1>
                         <p>Full Name</p>
-                        <input value="<?php echo $row1['name'] .'' ?>" type="text" minlength="3" name="name">
+                        <input type="text" minlength="3" name="name">
                         <p>Phone</p>
-                        <input value="<?php echo $row1['number'] .'' ?>"type="number" name="number">
+                        <input type="number" name="number">
                         <p>CDL #</p>
-                        <input value="<?php echo $row1['cdl'] .'' ?>"type="text" name="cdl">
+                        <input type="text" name="cdl">
                         <p>Current City</p>
-                        <input value="<?php echo $row1['city'] .'' ?>"type="text" name="city">
+                        <input type="text" name="city">
                         <p>Years of Experience</p>
-                        <input value="<?php echo $row1['experience'] .'' ?>"type="number" name="experience">
+                        <input type="number" name="experience">
                         <p>Current State</p>
                         <select name="state" id="state">
                             <option selected="selected">Select a State</option>
