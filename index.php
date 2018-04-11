@@ -20,7 +20,7 @@
           <li><a href="clientRegister.php">Clients</a></li>
           <li><a href="driverRegister.php">Drivers</a></li>
           <li><a>Info</a></li>
-          <li><a>About Us</a></li>
+          <li><a href="chooseAccess.php">Login</a></li>
         </ul>
       </nav>
     </header>
