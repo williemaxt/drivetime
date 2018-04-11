@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Megrim');
 /*
 red: #C11218
 grey: #808080
@@ -7,13 +8,35 @@ font-family: 'Nunito', sans-serif;
 font-family: 'Ubuntu', sans-serif;
 */
 
+.burger-nav{
+  display: block;
+  height: 40px;
+  width: 30px;
+  float: right;
+  cursor: pointer;
+}
+#burger div{
+  width: 35px;
+  height: 5px;
+  background: #ffffff;
+  margin: 5px;
+}
+#burger{
+  float: right;
+  margin: 10px;
+  margin-right: 20px;
+  visibility: hidden;
+}
+
+
+
 /*Classes for UI Elements*/
 .button{
   border: 2px solid #ffffff;
   background: #eca217;
   color: #ffffff;
   height: 50px;
-  width: 250px;
+  width: 200px;
   border-radius: 3px;
   font-size: 2em;
 }
@@ -26,9 +49,10 @@ font-family: 'Ubuntu', sans-serif;
   background: transparent;
   color: #ffffff;
   height: 50px;
-  width: 250px;
+  width: 200px;
   border-radius: 3px;
   font-size: .5em;
+  margin-bottom: 10px;
 }
 .transparent-button:hover{
   color: #eca217;
@@ -53,6 +77,10 @@ header{
   background: #3896b2;
   min-height: 85px;
   font-weight: bold;
+}
+#logoName{
+  font-family: 'Megrim', cursive;
+  color: #ffffff;
 }
 nav{
   height: 100%;
@@ -122,7 +150,7 @@ nav a {
 }
 .bar{
   width: 100%;
-  min-height: 150px;
+  min-height: 120px;
   background: #3896b2;
   margin: 0;
   font-family: 'Nunito', sans-serif;
@@ -137,11 +165,14 @@ nav a {
 }
 .bar ul li{
   display: inline-block;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 #homeBar ul li p{
   font-weight: bold;
+}
+#homeBar ul{
+  padding: 0;
 }
 main{
   float: left;
@@ -204,7 +235,6 @@ aside{
   font-family: 'Ubuntu', sans-serif;
   padding-top: 30px;
   padding-bottom: 50px;
-  //insert a background image
 }
 #secondBar ul h1{
   font-size: 1em;
@@ -299,25 +329,78 @@ aside{
     margin: 0px auto;
   }
   #secondBar ul{
-
+    display: block;
   }
   #secondBar ul li{
-    width: 36%;
+    width: 300px;
     margin-top: 15px;
   }
-  #testimonies li{
-    padding-left: 6%;
-    padding-right: 6%;
-  }
+
 }
+
 
 
 @media screen and (max-width:928px){
   #secondBar ul li{
     width: 80%;
     margin-top: 15px;
+    margin: 0;
   }
   .iconUl li{
     width: 45%;
+  }
+}
+
+@media screen and (max-width:770px){
+  #burger{
+    visibility: visible;
+  }
+  nav ul{
+    list-style: none;
+    overflow: hidden;
+    height: 0;
+    margin: 0px auto;
+    width: 100%;
+    transition: 1s;
+  }
+  nav ul.open{
+    height: auto;
+    margin: 0px auto;
+    padding-top: 40px;
+    transition: 1s;
+  }
+
+  #secondBar ul li{
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin: 0;
+  }
+  .iconUl li{
+    width: 300px;
+  }
+  #reviews li{
+    display: inline;
+    width: 300px;
+    margin: 0px auto;
+  }
+  #reviews li img{
+    margin: 0px auto;
+    width: 200px;
+  }
+}
+@media screen and (max-width:605px){
+
+}
+@media screen and (max-width:400px){
+  .imgHeader h1{
+    margin: 0px;
+    padding-top: 100px;
+    font-size: 3em;
+  }
+  .imgHeader p {
+    font-size: 2em;
+    color: #ffffff;
+    font-family: 'Nunito', sans-serif;
   }
 }
