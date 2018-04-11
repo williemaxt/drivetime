@@ -1,4 +1,6 @@
+
 @import url('https://fonts.googleapis.com/css?family=Acme|Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Megrim');
 .wrapper{
     max-width: 1300px;
     margin: 0px auto;
@@ -37,7 +39,7 @@ nav h1{
     display: inline-block;
     color: #ffffff;
     margin-left: 10px;
-    font-family: 'Acme', sans-serif;
+    font-family: 'Megrim', cursive;
 }
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
 .sticky {
@@ -340,6 +342,22 @@ aside a:hover{
 
 .closeFiles:hover,
 .closeFiles:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*The files close*/
+.closeClient {
+    color: #eca217;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 23px;
+    margin-right: 10px;
+}
+
+.closeClient:hover,
+.closeClient:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
