@@ -27,13 +27,13 @@ if(isset($_POST['submit'])){
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Client Login</title>
+    <title>Driver Login</title>
     <link rel="stylesheet" href="css/forms.css">
 </head>
 <body>
 <br>
 <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-    <h1>Login</h1>
+    <h1>Driver Login</h1>
     <p>Email</p>
     <input type="text" name="email" value="">
     <p>Password</p>
