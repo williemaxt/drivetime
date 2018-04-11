@@ -8,9 +8,14 @@
   <body>
     <!--Navigation menu-->
     <header>
-      <nav>
+        <div id="burger" class="burger-nav">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+      <nav id="navbar">
+          <h3 id="logoName">Prodrivetime</h3>
         <ul>
-          <li><h1 id="logoName">DT</h1></li>
           <li><a>Home</a></li>
           <li><a href="clientRegister.php">Clients</a></li>
           <li><a href="driverRegister.php">Drivers</a></li>
@@ -22,7 +27,7 @@
 
     <div id="imgHome"class="imgHeader">
       <div class="imgText">
-        <h1>Drive Time</h1>
+        <h1>Pro Drive Time</h1>
         <p>Professional drivers at a moments notice</p>
         <button class="button" name="button">Learn More</button>
       </div>
@@ -31,8 +36,8 @@
 
 <div id="homeBar" class="bar">
   <ul>
-    <li><p>Get a Free Quote Today! >></p></li>
-    <li><button class="transparent-button">Get A Free Quote</button></li>
+    <li><p>Drive Today! >></p></li>
+    <li><button class="transparent-button">Sign Up</button></li>
   </ul>
 
 </div>
@@ -96,7 +101,7 @@
 </div>
 <div id="testimonies" class="wrapper"><!--Wrapper for the rest of the page-->
 <h3 class="prompt">This Is What People Say About Us</h3>
-<ul>
+<ul id="reviews">
   <li>
     <img src="images/man-user.svg" alt="">
     <h1>Marcelle</h1>
@@ -116,8 +121,8 @@
 </div><!--End of the second wrapper-->
 <div id="homeBar" class="bar">
   <ul>
-    <li><p>Get a Free Quote Today! >></p></li>
-    <li><button class="transparent-button">Get A Free Quote</button></li>
+    <li><p>Hire Today! >></p></li>
+    <li><button class="transparent-button">Sign up</button></li>
   </ul>
 </div>
 <div id="imgHomeBottom"class="imgHeader">
@@ -154,4 +159,6 @@
 </div>
 </footer>
   </body>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="js/index.js"></script>
 </html>
