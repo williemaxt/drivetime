@@ -5,7 +5,7 @@ login.php is client login page. <br>
 login1.php is driver login page. <br>
 chooseAccess.php is used as a two-way splitter. Combines both logins.
 
-For production change the connection.php page to match your credentials. 
+<br>For production change the connection.php page to match your credentials. <br>
 
 
 <h2>TODO:</h2>
