@@ -19,19 +19,13 @@ if(empty($_POST['keyword'])){
     $search = $_POST['keyword'];
     $sql = "SELECT * FROM `drivers` WHERE state LIKE '$search' ";
 }
+
 //variable to query the code
 //conn is taken from the connection file
 $result = mysqli_query($conn, $sql);
 //variable for displaying the current users information
 $result1 = mysqli_query($conn, $sql1);
 
-//transactions in sql. records current user email, driver email, token, and a current timestamp (Y-m-d h:i:s).
-$driveremail = $_POST['driveremail'];
-$token = $_POST['token'];
-$timestamp = $_POST['timestamp'];
-$timestamp = date("Y-m-d h:i:s");
-//inserting into sql.
-$sql = "INSERT INTO transactions (client_email, driver_email, transaction_token, timestamp) VALUES ('$username', '$driveremail', '$token','$timestamp');";
 
 ?>
 
@@ -86,23 +80,54 @@ $sql = "INSERT INTO transactions (client_email, driver_email, transaction_token,
         <br>
         <!--List of normal AND SEARCH Results-->
         <?php
-        if ($result->num_rows > 0) {
-            // output data of each row in the database and displays it as a card
-            while($row = $result->fetch_assoc()) {
-                echo '<div class="driver-card">
+
+
+            if ($result->num_rows > 0) {
+
+                // output data of each row in the database and displays it as a card
+                //$row = $result->fetch_assoc();
+                if (isset($_POST['hire'])) {
+                    $con = new mysqli('localhost', 'root', 'root', 'drive_time');
+
+
+                    $name = '' . $row1['name'] . '';
+                    $business = '' . $row1['bname']. '';
+                    //$driver_email1 = '' . $row['email'] . '';
+
+
+                    $con->query("INSERT INTO request_trans (client_email, client_name, business) VALUES ('$username', '$name', '$business')");
+
+                }
+                    while ($row = $result->fetch_assoc()) {
+
+
+                        echo '<div class="driver-card">  
+            <form action="clientdash.php" method="post">
             <h1>' . $row['name'] . '</h1>
             <p>STATE: ' . $row['state'] . '</p>
             <p>CITY: ' . $row['city'] . '</p>
             <p>EXPERIENCE: ' . $row['experience'] . ' YEARS</p>
             <p>Medical: <a href="driverDocs/' . $row['medical'] . '" target="_blank">View</a></p>
             <p>Crash Rep: <a href="driverDocs/' . $row['crash_report'] . '" target="_blank">View</a></p>
-            <input type="submit" value="hire" name="hire">  
+            
+            
+            <p style="visibility: hidden">' . $row['email'] . '</p>
+            
+            
+            
+            
+            <input type="submit" value="hire" name="hire"> 
+            </form>
 
             </div>';
-            }
-        } else {
-            echo "No Drivers In $search Yet. Come back soon!";
-        }
+
+
+                    }
+                } else {
+                    echo "No Drivers In $search Yet. Come back soon!";
+                }
+
+
         $conn->close();
         ?>
     </main>
