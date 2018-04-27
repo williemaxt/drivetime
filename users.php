@@ -20,7 +20,7 @@ class User{
     }
 
     
-     // Returns rows from the database based on the conditions
+     // Returns rows from the database.
     
     public function getRows($conditions = array()){
         $sql = 'SELECT ';
@@ -70,7 +70,7 @@ class User{
     }
 
     
-     // Insert data into the database
+     // Insert the data into the database
    
     public function insert($data){
         if(!empty($data) && is_array($data)){
