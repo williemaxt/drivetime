@@ -1,11 +1,5 @@
 <?php
-/*
- * User Class
- * This class is used for database related (connect fetch, and insert) operations
- * @author    CodexWorld.com
- * @url       http://www.codexworld.com
- * @license   http://www.codexworld.com/license
- */
+
 class User{
     private $dbHost     = "localhost";
     private $dbUsername = "root";
@@ -25,11 +19,9 @@ class User{
         }
     }
 
-    /*
-     * Returns rows from the database based on the conditions
-     * @param string name of the table
-     * @param array select, where, order_by, limit and return_type conditions
-     */
+  
+     //Returns rows from the database based on the conditions
+     
     public function getRows($conditions = array()){
         $sql = 'SELECT ';
         $sql .= array_key_exists("select",$conditions)?$conditions['select']:'*';
@@ -77,11 +69,9 @@ class User{
         return !empty($data)?$data:false;
     }
 
-    /*
-     * Insert data into the database
-     * @param string name of the table
-     * @param array the data for inserting into the table
-     */
+    
+     // Insert data into the database
+     
     public function insert($data){
         if(!empty($data) && is_array($data)){
             $columns = '';
@@ -107,11 +97,9 @@ class User{
         }
     }
 
-    /*
-     * Update data into the database
-     * @param string name of the table
-     * @param array the data for inserting into the table
-     */
+    
+     // Update data into the database
+    
     public function update($data, $conditions){
         if(!empty($data) && is_array($data) && !empty($conditions)){
             //prepare columns and values sql
