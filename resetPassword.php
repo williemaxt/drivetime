@@ -1,28 +1,24 @@
 <?php
-
-require 'functions.php';
-	if (isset($_GET['email']) && isset($_GET['token'])) {
-		$conn = new mysqli('localhost', 'usr', 'pwd', 'drive_time');
-
-		$email = $conn->real_escape_string($_GET['email']);
-		$token = $conn->real_escape_string($_GET['token']);
-
-		$sql = $conn->query("SELECT id FROM drivers WHERE
-			email='$email' AND token='$token' AND token<>'' AND tokenExpire > NOW()
-		");
-
-		if ($sql->num_rows > 0 ) {
-			$newPassword = generateNewString();
-			$newPasswordEncrypted = password_hash($newPassword, PASSWORD_DEFAULT);
-			$conn->query("UPDATE drivers SET token='', password = '$newPasswordEncrypted'
-				WHERE email='$email'");
-
-		echo "<h1>Your New Password Is $newPassword <br><a href='login.php'></br> Click Here To Log In</a></h1>";
-
-		} else
-		redirectToLoginPage();
-	} else {
-		redirectToLoginPage();
-	}
-  
+session_start();
+$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
+if(!empty($sessData['status']['msg'])){
+    $statusMsg = $sessData['status']['msg'];
+    $statusMsgType = $sessData['status']['type'];
+    unset($_SESSION['sessData']['status']);
+}
 ?>
+<h2>Reset Your Account Password</h2>
+<?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
+<div class="container">
+    <div class="regisFrm">
+        <form action="login1.php" method="post">
+            <input type="password" name="password" placeholder="PASSWORD" required="">
+            <input type="password" name="confirm_password" placeholder="CONFIRM PASSWORD" required="">
+            <div class="send-button">
+                <input type="hidden" name="fp_code" value="<?php echo $_REQUEST['fp_code']; ?>"/>
+                <input type="submit" name="resetSubmit" value="RESET PASSWORD">
+            </div>
+        </form>
+    </div>
+</div>
+
