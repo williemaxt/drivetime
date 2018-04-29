@@ -26,7 +26,6 @@ $result = mysqli_query($conn, $sql);
 //variable for displaying the current users information
 $result1 = mysqli_query($conn, $sql1);
 
-
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +49,19 @@ $result1 = mysqli_query($conn, $sql1);
     }else{
         echo 'We cant seem to pull your info';
     }
+
+
+
+    $driveremail = $_POST['driveremail'];
+
+    $timestamp = $_POST['timestamp'];
+    $timestamp = date("Y-m-d h:i:s");
+
+
+
+    $sql = "INSERT INTO transactions (client_email, driver_email,  timestamp) VALUES ('$username', '$driveremail', '$timestamp');";
+
+
     ?>
 </nav>
 <!--This is where the list of drivers will show-->
@@ -86,18 +98,8 @@ $result1 = mysqli_query($conn, $sql1);
 
                 // output data of each row in the database and displays it as a card
                 //$row = $result->fetch_assoc();
-                if (isset($_POST['hire'])) {
-                    $con = new mysqli('localhost', 'root', 'root', 'drive_time');
+                //$experience = ''. $row['experience'] .'';
 
-
-                    $name = '' . $row1['name'] . '';
-                    $business = '' . $row1['bname']. '';
-                    //$driver_email1 = '' . $row['email'] . '';
-
-
-                    $con->query("INSERT INTO request_trans (client_email, client_name, business) VALUES ('$username', '$name', '$business')");
-
-                }
                     while ($row = $result->fetch_assoc()) {
 
 
@@ -106,29 +108,47 @@ $result1 = mysqli_query($conn, $sql1);
             <h1>' . $row['name'] . '</h1>
             <p>STATE: ' . $row['state'] . '</p>
             <p>CITY: ' . $row['city'] . '</p>
-            <p>EXPERIENCE: ' . $row['experience'] . ' YEARS</p>
+            <p>EXPERIENCE: '. $row['experience']. 'YEARS</p>
             <p>Medical: <a href="driverDocs/' . $row['medical'] . '" target="_blank">View</a></p>
             <p>Crash Rep: <a href="driverDocs/' . $row['crash_report'] . '" target="_blank">View</a></p>
+            <input name="details" type="text" maxlength="60" placeholder="Enter the details"><br><br>
+            <input name="price" type="text" placeholder="Enter Price Amount">
             
-            
-            <p style="visibility: hidden">' . $row['email'] . '</p>
-            
-            
-            
+            <input  name="email"  style="visibility: hidden"  value=' . $row['email'] . '>
+          
             
             <input type="submit" value="hire" name="hire"> 
             </form>
 
             </div>';
 
-
                     }
+
                 } else {
                     echo "No Drivers In $search Yet. Come back soon!";
                 }
 
 
+
+
         $conn->close();
+
+        if (isset($_POST['hire'])) {
+            $con = new mysqli('localhost', 'root', 'root', 'drive_time');
+
+
+            $name = '' . $row1['name'] . '';
+            $business = '' . $row1['bname'] . '';
+            $driveremail = $_POST['email'];
+            $details = $_POST['details'];
+            $amount_offered = $_POST['price'];
+
+            $con->query("INSERT INTO request_trans (client_email, client_name, business, details, amount_offered, driveremail) VALUES ('$username', '$name','$business', '$details','$amount_offered','$driveremail')");
+
+        }
+
+
+
         ?>
     </main>
 </div>
