@@ -43,25 +43,10 @@ if(isset($_POST['forgotSubmit'])){
 
 
 
-//if (isset($_POST['email'])) {
-//  $conn = new mysqli('localhost', 'root', 'root', 'drive_time');
-// $email = $conn->real_escape_string($_REQUEST['email']);
-// $sql = $conn->query("SELECT id FROM drivers WHERE email='$email'");
-// if ($sql->num_rows > 0) {
-//   $token = generateNewString();
-// $conn->query("UPDATE drivers SET token='$token',
-//             tokenExpire=DATE_ADD(NOW(), INTERVAL 5 MINUTE)
-//           WHERE email='$email'
-//");
-/**
- * This example shows making an SMTP connection with authentication.
- */
-//Import the PHPMailer class into the global namespace
-
-//SMTP needs accurate times, and the PHP time zone MUST be set
-//This should be done in your php.ini, but this is how to do it if you don't have access to that
 date_default_timezone_set('Etc/UTC');
 //Create a new PHPMailer instance
+include_once 'forgotPassword.php';
+
 $mail = new PHPMailer(true);
 try {
 //Tell PHPMailer to use SMTP
@@ -78,15 +63,18 @@ try {
 //Whether to use SMTP authentication
     $mail->SMTPAuth = true;
 //Username to use for SMTP authentication
-    $mail->Username = 'youremail@account.com';
+    $mail->Username = 'email_username (ex. youremail@gmail.com');
 //Password to use for SMTP authentication
-    $mail->Password = 'email-password';
+    $mail->Password = 'password';
 //Set who the message is to be sent from
-    $mail->setFrom('From_Sender@gmail.com', 'First Last');
-//Set an alternative reply-to address. This is optional, uncomment and fill details below.
-    $mail->addReplyTo('ReplyTo@gmail.com', 'First Last');
+    $mail->setFrom('YOUREMAIL@email.com', 'ProDriveTime');
+//Set an alternative reply-to address
+    $mail->addReplyTo('YOUREMAIL@email.com', 'ProDriveTime');
 //Set who the message is to be sent to
-    $mail->addAddress('Sendto@gmail.com', 'John Doe');
+    //(Leave this line intact but commented) $mail->addAddress('YOUREMAIL@gmail.com', 'John Doe');
+    $mail->addAddress($_POST['email']);
+	// this above line is special. It will send email to whatever email typed in textbox. Autocomplete must remain off.
+	
 //Set the subject line
     $mail->Subject = 'PHPMailer SMTP test';
 //Read an HTML message body from an external file, convert referenced images to embedded,
@@ -217,9 +205,9 @@ if(isset($_POST['submit'])){
 <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
     <h1>Driver Login</h1>
     <p>Email</p>
-    <input type="text" name="email" value="">
+    <input type="text" name="email" autocomplete="off" value="">
     <p>Password</p>
-    <input type="password" name="password" value="">
+    <input type="password" name="password" autocomplete="off" value="">
     <input type="submit" name="submit" value="Login" class="submitBtn">
     <a style="text-align:center;" href="forgotPassword.php"><p>Forgot Password?</p></a>
 </form>
