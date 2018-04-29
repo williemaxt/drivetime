@@ -2,21 +2,35 @@
 
 
 if(isset($_POST['submit'])) {
-    $con = new mysqli('localhost','root','Encryptme!!!','drive_time');
+    $con = new mysqli('localhost','root','root','drive_time');
 
-    $name = $con->real_escape_string($_POST['name']);
-    $email = $con->real_escape_string($_POST['email']);
-    $number = $con->real_escape_string($_POST['number']);
-    $password = $con->real_escape_string($_POST['password']);
-    $cPassword = $con->real_escape_string($_POST['cPassword']);
+   // $name = $con->real_escape_string($_POST['name']);
+   // $email = $con->real_escape_string($_POST['email']);
+   // $number = $con->real_escape_string($_POST['number']);
+   // $password = $con->real_escape_string($_POST['password']);
+    //$cPassword = $con->real_escape_string($_POST['cPassword']);
 
 
     if ($password != $cPassword)
         $msg = "Passwords do not match.";
     else {
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $con->query("INSERT INTO clients (name, email, number, password) VALUES ('$name', '$email', '$number', '$hash')");
+        //Prepared statement below. Stops injections.
+        $stmt = $con->prepare("INSERT INTO clients (name, email, number, bname, baddr, password) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $name,  $email, $number, $bname, $baddr, $hash );
+        //$con->query("INSERT INTO clients (name, email, number, password) VALUES ('$name', '$email', '$number', '$hash')");
         $msg = "You have been registered!";
+
+
+        $name = $con->real_escape_string($_POST['name']);
+        $email = $con->real_escape_string($_POST['email']);
+        $number = $con->real_escape_string($_POST['number']);
+        $password = $con->real_escape_string($_POST['password']);
+        $cPassword = $con->real_escape_string($_POST['cPassword']);
+        $bname = $con->real_escape_string($_POST['bname']);
+        $baddr = $con->real_escape_string($_POST['baddr']);
+        $stmt->execute();
+
     }
 
 
