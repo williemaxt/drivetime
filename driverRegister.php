@@ -65,31 +65,34 @@ if(isset($_POST['submit'])) {
 
 $con = new mysqli('localhost','username','password_goes_here','drive_time');
 
-$name = $con->real_escape_string($_POST['name']);
-$email = $con->real_escape_string($_POST['email']);
-$number = $con->real_escape_string($_POST['number']);
-$password = $con->real_escape_string($_POST['password']);
-$cPassword = $con->real_escape_string($_POST['cPassword']);
-$cdl = $con->real_escape_string($_POST['cdl']);
-$city = $con->real_escape_string($_POST['city']);
-$experience = $con->real_escape_string($_POST['experience']);
-$state = $con->real_escape_string($_POST['state']);
-$medical = $con->real_escape_string($_POST['medical']);
-$crash_report = $con->real_escape_string($_POST['crash_report']);
-
-
 if ($password != $cPassword)
     $msg = "Passwords do not match.";
 else {
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $con->query("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$cdl','$city', '$experience', '$state', '$medical', '$crash_report');");
+    $stmt = $con->prepare("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssss", $name,  $email, $number, $hash, $cdl, $city, $experience, $state );
+
+    //$con->query("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$cdl','$city', '$experience', '$state', '$medical', '$crash_report')");
 
     //$sql = "INSERT INTO drivers (name, email, number, password, medical, crash_report) VALUES ('$name', '$email', '$number', '$password', '$medical', '$crash_report');";
     //mysqli_query($conn, $sql);
     //take us back home after submission
     // header("Location: allcode.php?commit=success");
 
-}
+    $name = $con->real_escape_string($_POST['name']);
+    $email = $con->real_escape_string($_POST['email']);
+    $number = $con->real_escape_string($_POST['number']);
+    $password = $con->real_escape_string($_POST['password']);
+    $cPassword = $con->real_escape_string($_POST['cPassword']);
+    $cdl = $con->real_escape_string($_POST['cdl']);
+    $city = $con->real_escape_string($_POST['city']);
+    $experience = $con->real_escape_string($_POST['experience']);
+    $state = $con->real_escape_string($_POST['state']);
+    $medical = $con->real_escape_string($_POST['medical']);
+    $crash_report = $con->real_escape_string($_POST['crash_report']);
+    $stmt->execute();
+
+
 ?>
 <!DOCTYPE html>
 <html>
