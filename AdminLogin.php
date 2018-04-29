@@ -52,9 +52,9 @@ function getUserIpAddr(){
 <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
     <h1>Admin Login</h1>
     <p>Email</p>
-    <input type="text" name="email" value="">
+    <input type="text" name="email" autocomplete="off" value="">
     <p>Password</p>
-    <input type="password" name="password" value="">
+    <input type="password" name="password" autocomplete="off" value="">
     <input type="submit" name="submit" value="Login" class="submitBtn">
     <?php echo 'Your IP is: '.getUserIpAddr().' and will be logged for security.'; ?>
     <a style="text-align:center;" href="forgotPassword.php"><p>Forgot Password?</p></a>
