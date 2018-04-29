@@ -41,19 +41,19 @@ if(isset($_POST['submit'])) {
       <form id="registerClientForm" method="post" action="clientRegister.php">
           <h1>Register To Use</h1>
           <p>Full Name</p>
-          <input type="text" minlength="3" name="name">
+          <input type="text" minlength="3" autocomplete="off" name="name">
           <p>Email</p>
-          <input type="email" name="email">
+          <input type="email" autocomplete="off" name="email">
           <p>Phone</p>
-          <input type="number" name="number">
+          <input type="number" autocomplete="off" name="number">
           <p>Business Name</p>
-          <input type="text" name="bname">
+          <input type="text" autocomplete="off" name="bname">
           <p>Business Address</p>
-          <input type="text" name="baddr">
+          <input type="text" autocomplete="off" name="baddr">
           <p>Password</p>
-          <input type="password" minlength="8" name="password">
+          <input type="password" minlength="8" autocomplete="off" name="password">
           <p>Confirm Password</p>
-          <input type="password" minlength="8" name="cPassword">
+          <input type="password" minlength="8" autocomplete="off" name="cPassword">
           <input class="submitBtn" type="submit" name="submit" value="Submit">
       </form>
 
