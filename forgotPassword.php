@@ -12,12 +12,11 @@ if(!empty($sessData['status']['msg'])){
 <div class="container">
     <div class="regisFrm">
         <form action="login1.php" method="post">
-            <input type="email" name="email" placeholder="Email" required="">
+            <input type="email" autocomplete="off" name="email" placeholder="Email" required="">
             <div class="send-button">
                 <input type="submit" name="forgotSubmit" value="Continue...">
             </div>
         </form>
     </div>
 </div>
-
 
