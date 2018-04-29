@@ -106,21 +106,21 @@ else {
 <form id="registerDriverForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
     <h1>Register To Drive</h1>
     <p>Full Name</p>
-    <input type="text" minlength="3" name="name">
+    <input type="text" minlength="3" autocomplete="off" name="name">
     <p>Email</p>
-    <input type="text" name="email" value="">
+    <input type="text" name="email" autocomplete="off" value="">
     <p>Phone</p>
-    <input type="number" name="number">
+    <input type="number" autocomplete="off" name="number">
     <p>Password</p>
-    <input type="password" minlength="8" name="password">
+    <input type="password" minlength="8" autocomplete="off" name="password">
     <p>Confirm Password</p>
-    <input type="password" minlength="8" name="cPassword">
+    <input type="password" minlength="8" autocomplete="off" name="cPassword">
     <p>CDL #</p>
-    <input type="text" name="cdl">
+    <input type="text" autocomplete="off" name="cdl">
     <p>Current City</p>
-    <input type="text" name="city">
+    <input type="text" autocomplete="off" name="city">
     <p>Years of Experience</p>
-    <input type="number" name="experience">
+    <input type="number" autocomplete="off" name="experience">
     <p>Current State</p>
     <select name="state" id="state">
         <option selected="selected">Select a State</option>
