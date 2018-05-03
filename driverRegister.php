@@ -10,43 +10,46 @@ if(isset($_POST['submit'])) {
     $fileError = $_FILES['medical']['error'];
     $fileType = $_FILES['medical']['type'];
 //creates variables for handling the second file
-    $file1 = $_FILES['crash_report'];
-    $fileName1 = $_FILES['crash_report']['name'];
-    $fileTmpName1 = $_FILES['crash_report']['tmp_name'];
-    $fileSize1 = $_FILES['crash_report']['size'];
-    $fileError1 = $_FILES['crash_report']['error'];
-    $fileType1 = $_FILES['crash_report']['type'];
+    $filea = $_FILES['crash_report'];
+    $fileNamea = $_FILES['crash_report']['name'];
+    $fileTmpNamea = $_FILES['crash_report']['tmp_name'];
+    $fileSizea = $_FILES['crash_report']['size'];
+    $fileErrora = $_FILES['crash_report']['error'];
+    $fileTypea = $_FILES['crash_report']['type'];
 
     //setting what extensions we want to allow
     //exploding the values into an array
     $fileExt = explode('.',$fileName);
-    $fileExt1 = explode('.',$fileName1);
+    $fileExta = explode('.',$fileNamea);
     //getting the extension
     // and setting it to lower case
     $fileActualExt = strtolower(end($fileExt));
-    $fileActualExt1 = strtolower(end($fileExt1));
+    $fileActualExta = strtolower(end($fileExta));
 
     //allowed files
     $allowed = array('jpg', 'jpeg', 'png', 'pdf');
 
     //****************checking to see if the file we chose is allowed***********************
     //checking for file errors
-    if(in_array($fileActualExt, $allowed, $fileActualExt1)){
+    if(in_array($fileActualExt, $allowed, $fileActualExta)){
         if($fileError === 0){
             //this checks the file size in kb(kilobytes)
-            if($fileSize < 5000000 || $fileSize1 < 5000000){
+            if($fileSize <= 2000000 && $fileSizea <= 2000000){
                 //this variable will be equal to the new name of the file (unique id)
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
-                $fileNameNew1 = uniqid('', true).".".$fileActualExt1;
+                $fileNameNewa = uniqid('', true).".".$fileActualExta;
                 //this variable will be equal to the destination or folder of the file
                 $fileDestination = 'driverDocs/'.$fileNameNew;
-                $fileDestination1 = 'driverDocs/'.$fileNameNew1;
+                $fileDestination1 = 'driverDocs/'.$fileNameNewa;
+
                 //function that will move our uploaded file to its destination
                 move_uploaded_file($fileTmpName, $fileDestination);
-                move_uploaded_file($fileTmpName1, $fileDestination1);
-                header("Location: driverRegister.php");
+                move_uploaded_file($fileTmpNamea, $fileDestination1);
+
                 //now we can echo a success message or redirect them to a new page with header()
-                echo "Uploaded Successfully!";
+                echo "Uploaded Successfully! Please login to <a href='login1.php'> continue... </a>";
+                //header("login1.php");
+
             }
             else{
                 echo "your file is too big";
@@ -63,36 +66,33 @@ if(isset($_POST['submit'])) {
 
 }
 
-$con = new mysqli('localhost','username','password_goes_here','drive_time');
+$con = new mysqli('localhost','root','root','drive_time');
+
+$name = $con->real_escape_string($_POST['name']);
+$email = $con->real_escape_string($_POST['email']);
+$number = $con->real_escape_string($_POST['number']);
+$cdl = $con->real_escape_string($_POST['cdl']);
+$city = $con->real_escape_string($_POST['city']);
+$experience = $con->real_escape_string($_POST['experience']);
+$state = $con->real_escape_string($_POST['state']);
+$medical = $con->real_escape_string($_POST['medical']);
+$crash_report = $con->real_escape_string($_POST['crash_report']);
+$password = $con->real_escape_string($_POST['password']);
+$cPassword = $con->real_escape_string($_POST['cPassword']);
 
 if ($password != $cPassword)
     $msg = "Passwords do not match.";
 else {
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $con->prepare("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssss", $name,  $email, $number, $hash, $cdl, $city, $experience, $state );
-
-    //$con->query("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$cdl','$city', '$experience', '$state', '$medical', '$crash_report')");
+    $con->query("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$cdl','$city', '$experience', '$state', '$medical', '$crash_report')");
 
     //$sql = "INSERT INTO drivers (name, email, number, password, medical, crash_report) VALUES ('$name', '$email', '$number', '$password', '$medical', '$crash_report');";
     //mysqli_query($conn, $sql);
     //take us back home after submission
     // header("Location: allcode.php?commit=success");
 
-    $name = $con->real_escape_string($_POST['name']);
-    $email = $con->real_escape_string($_POST['email']);
-    $number = $con->real_escape_string($_POST['number']);
-    $password = $con->real_escape_string($_POST['password']);
-    $cPassword = $con->real_escape_string($_POST['cPassword']);
-    $cdl = $con->real_escape_string($_POST['cdl']);
-    $city = $con->real_escape_string($_POST['city']);
-    $experience = $con->real_escape_string($_POST['experience']);
-    $state = $con->real_escape_string($_POST['state']);
-    $medical = $con->real_escape_string($_POST['medical']);
-    $crash_report = $con->real_escape_string($_POST['crash_report']);
-    $stmt->execute();
 
-
+}
 ?>
 <!DOCTYPE html>
 <html>
