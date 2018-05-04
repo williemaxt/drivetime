@@ -55,18 +55,21 @@ nav h1{
 .admin-content{
   float: left;
   padding: 10px;
+
+
 }
+
 .admin-content p{
   color: #333333;
   display: inline;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 .admin-card button{
   float: right;
   height: 100%;
-  width: 10%;
+  width: 7%;
   margin: 0;
   border-top-right-radius:5px;
   border-bottom-right-radius:5px;
@@ -428,4 +431,5 @@ aside a:hover{
         border-radius: 30px;
     }
 }
+
 
