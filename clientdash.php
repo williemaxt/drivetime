@@ -10,14 +10,14 @@ if(!isset($_SESSION))
 //this pulls the username(email) saved in the session to put into the sql query
 $username = $_SESSION['username'];
 //the query will look for users with that email and display their information on the dashboard
-$sql1 = "SELECT * FROM `clients` WHERE email = '$username' ";
+$sql1 = "SELECT * FROM `clients` WHERE email = '$username'";
 //THIS WILL RUN THE SEARCH OPERATION
 //Search bar logic
 if(empty($_POST['keyword'])){
     $sql  = 'SELECT * FROM `drivers`';
 }elseif(isset($_POST['keyword'])){
     $search = $_POST['keyword'];
-    $sql = "SELECT * FROM `drivers` WHERE state LIKE '$search' ";
+    $sql = "SELECT * FROM `drivers` WHERE state LIKE '$search'";
 }
 
 //variable to query the code
@@ -40,6 +40,7 @@ $result1 = mysqli_query($conn, $sql1);
 <nav id="navbar">
     <h1>Prodrivetime</h1>
     <p><a href="logout.php?logout=true">Logout</a></p>
+
     <!--the php snippet below echos the account information of the person logged in-->
     <?php
     if($result1->num_rows > 0){
@@ -49,17 +50,6 @@ $result1 = mysqli_query($conn, $sql1);
     }else{
         echo 'We cant seem to pull your info';
     }
-
-
-
-    $driveremail = $_POST['driveremail'];
-
-    $timestamp = $_POST['timestamp'];
-    $timestamp = date("Y-m-d h:i:s");
-
-
-
-    $sql = "INSERT INTO transactions (client_email, driver_email,  timestamp) VALUES ('$username', '$driveremail', '$timestamp');";
 
 
     ?>
@@ -75,7 +65,10 @@ $result1 = mysqli_query($conn, $sql1);
                 <p>NAME: ' . $row1['name'] . '</p>
                 <p>EMAIL: ' . $row1['email'] . '</p>
                 <p>PHONE: ' . $row1['number'] . '</p>
-                <p>BUSINESS: ' . $row1['bname'] . '</p>';
+                <p>BUSINESS: ' . $row1['bname'] . '</p>
+                <a href="orders.php">My Orders</a>
+                ';
+
         }else{
             echo 'We cant seem to pull your info';
         }
@@ -113,10 +106,7 @@ $result1 = mysqli_query($conn, $sql1);
             <p>Crash Rep: <a href="driverDocs/' . $row['crash_report'] . '" target="_blank">View</a></p>
             <input name="details" type="text" maxlength="60" placeholder="Enter the details"><br><br>
             <input name="price" type="text" placeholder="Enter Price Amount">
-            
-            <input  name="email"  style="visibility: hidden"  value=' . $row['email'] . '>
-          
-            
+            <input  type="hidden" name="email" style="visibility: hidden"  value=' . $row['email'] . '>            
             <input type="submit" value="hire" name="hire"> 
             </form>
 
@@ -127,9 +117,6 @@ $result1 = mysqli_query($conn, $sql1);
                 } else {
                     echo "No Drivers In $search Yet. Come back soon!";
                 }
-
-
-
 
         $conn->close();
 
@@ -143,7 +130,7 @@ $result1 = mysqli_query($conn, $sql1);
             $details = $_POST['details'];
             $amount_offered = $_POST['price'];
 
-            $con->query("INSERT INTO request_trans (client_email, client_name, business, details, amount_offered, driveremail) VALUES ('$username', '$name','$business', '$details','$amount_offered','$driveremail')");
+            $con->query("INSERT INTO request_trans (client_email, client_name, business, details, amount_offered, driveremail) VALUES ('$username', '$name','$business', '$details','$amount_offered','$driveremail');");
 
         }
 
