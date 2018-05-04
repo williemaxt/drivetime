@@ -1,71 +1,5 @@
 <?php
 
-
-if(isset($_POST['submit'])) {
-//creates variables for handling the first file
-    $file = $_FILES['medical'];
-    $fileName = $_FILES['medical']['name'];
-    $fileTmpName = $_FILES['medical']['tmp_name'];
-    $fileSize = $_FILES['medical']['size'];
-    $fileError = $_FILES['medical']['error'];
-    $fileType = $_FILES['medical']['type'];
-//creates variables for handling the second file
-    $filea = $_FILES['crash_report'];
-    $fileNamea = $_FILES['crash_report']['name'];
-    $fileTmpNamea = $_FILES['crash_report']['tmp_name'];
-    $fileSizea = $_FILES['crash_report']['size'];
-    $fileErrora = $_FILES['crash_report']['error'];
-    $fileTypea = $_FILES['crash_report']['type'];
-
-    //setting what extensions we want to allow
-    //exploding the values into an array
-    $fileExt = explode('.',$fileName);
-    $fileExta = explode('.',$fileNamea);
-    //getting the extension
-    // and setting it to lower case
-    $fileActualExt = strtolower(end($fileExt));
-    $fileActualExta = strtolower(end($fileExta));
-
-    //allowed files
-    $allowed = array('jpg', 'jpeg', 'png', 'pdf');
-
-    //****************checking to see if the file we chose is allowed***********************
-    //checking for file errors
-    if(in_array($fileActualExt, $allowed, $fileActualExta)){
-        if($fileError === 0){
-            //this checks the file size in kb(kilobytes)
-            if($fileSize <= 2000000 && $fileSizea <= 2000000){
-                //this variable will be equal to the new name of the file (unique id)
-                $fileNameNew = uniqid('', true).".".$fileActualExt;
-                $fileNameNewa = uniqid('', true).".".$fileActualExta;
-                //this variable will be equal to the destination or folder of the file
-                $fileDestination = 'driverDocs/'.$fileNameNew;
-                $fileDestination1 = 'driverDocs/'.$fileNameNewa;
-
-                //function that will move our uploaded file to its destination
-                move_uploaded_file($fileTmpName, $fileDestination);
-                move_uploaded_file($fileTmpNamea, $fileDestination1);
-
-                //now we can echo a success message or redirect them to a new page with header()
-                echo "Uploaded Successfully! Please login to <a href='login1.php'> continue... </a>";
-                //header("login1.php");
-
-            }
-            else{
-                echo "your file is too big";
-            }
-        }
-        else{
-            echo "There was an error uploading your file!";
-        }
-    }
-    else{
-        //checks for the specified file types
-        echo "you cannot upload this file type!";
-    }
-
-}
-
 $con = new mysqli('localhost','root','root','drive_time');
 
 $name = $con->real_escape_string($_POST['name']);
@@ -85,13 +19,7 @@ if ($password != $cPassword)
 else {
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $con->query("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$cdl','$city', '$experience', '$state', '$medical', '$crash_report')");
-
-    //$sql = "INSERT INTO drivers (name, email, number, password, medical, crash_report) VALUES ('$name', '$email', '$number', '$password', '$medical', '$crash_report');";
-    //mysqli_query($conn, $sql);
-    //take us back home after submission
-    // header("Location: allcode.php?commit=success");
-
-
+    
 }
 ?>
 <!DOCTYPE html>
@@ -104,7 +32,6 @@ else {
 </head>
 <body>
 <br>
-
 
 <form id="registerDriverForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
     <h1>Register To Drive</h1>
@@ -179,12 +106,6 @@ else {
         <option value="WI">Wisconsin</option>
         <option value="WY">Wyoming</option>
     </select>
-    <p>Medical</p>
-    <input type="file" name="medical">
-    <p>Crash Report</p>
-    <input type="file" name="crash_report">
-    <input class="submitBtn" type="submit" name="submit" value="submit">
 </form>
-
 </body>
 </html>
