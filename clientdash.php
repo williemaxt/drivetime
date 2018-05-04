@@ -105,7 +105,7 @@ $result1 = mysqli_query($conn, $sql1);
             <p>Medical: <a href="driverDocs/' . $row['medical'] . '" target="_blank">View</a></p>
             <p>Crash Rep: <a href="driverDocs/' . $row['crash_report'] . '" target="_blank">View</a></p>
             <input name="details" type="text" maxlength="60" placeholder="Enter the details"><br><br>
-            <input name="price" type="text" placeholder="Enter Price Amount">
+            <input name="price" type="text" placeholder="Enter Price Amount"><br><br>
             <input  type="hidden" name="email" style="visibility: hidden"  value=' . $row['email'] . '>            
             <input type="submit" value="hire" name="hire"> 
             </form>
