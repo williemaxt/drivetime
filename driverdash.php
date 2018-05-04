@@ -21,10 +21,6 @@ $result1 = mysqli_query($conn, $sql1);
 //this will update the users information on the database
 
 
-
-
-
-
 if(isset($_POST['submit'])) {
 //creates variables for handling the first file
     $file = $_FILES['medical'];
@@ -147,10 +143,6 @@ if(isset($_POST['submitCrash'])) {
     }
 
 }
-
-
-
-
 
 ?>
 
@@ -346,9 +338,6 @@ if(isset($_POST['submitCrash'])) {
             $con->query("INSERT INTO transactions (client_email, client_name, business, details, amount_offered, driver_email) VALUES ('$client_email', '$client_name', '$business', '$details', '$amount_offered', '$username');");
             exit();
         }
-
-
-
 
         $conn->close();
         ?>
