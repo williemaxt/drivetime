@@ -144,6 +144,10 @@ if(isset($_POST['submitCrash'])) {
 
 }
 
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -206,7 +210,7 @@ if(isset($_POST['submitCrash'])) {
                 <p>Full Name</p>
                 <input type="text" minlength="3" name="name">
                 <p>Phone</p>
-                <input type="number" name="number">
+                <input type="number" maxlength="10" name="number">
                 <p>CDL #</p>
                 <input type="text" name="cdl">
                 <p>Current City</p>
@@ -273,6 +277,25 @@ if(isset($_POST['submitCrash'])) {
             </form>
         </div>
     </div>
+    <?php
+
+    if(isset($_POST['submitDriverUpdate'])) {
+
+        $name = $_POST['name'];
+        $number = $_POST['number'];
+        //$cdl = $_POST['cdl']; // WE MUST MAKE CDL A FILE UPLOAD.
+        $city = $_POST['city'];
+        $experience = $_POST['experience'];
+        $state = $_POST['state'];
+        $conn->query("UPDATE drivers SET name = '$name', number = '$number', city = '$city', experience = '$experience', state = '$state' WHERE email = '$username';");
+
+    } else {
+
+        echo 'Invalid Request.';
+    }
+
+    ?>
+
     <!--End of modal-->
     <!-- The Modal The Modal For Account Info-->
     <div id="filesModal" class="modal">
@@ -338,6 +361,7 @@ if(isset($_POST['submitCrash'])) {
             $con->query("INSERT INTO transactions (client_email, client_name, business, details, amount_offered, driver_email) VALUES ('$client_email', '$client_name', '$business', '$details', '$amount_offered', '$username');");
             exit();
         }
+
 
         $conn->close();
         ?>
