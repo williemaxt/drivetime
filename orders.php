@@ -104,26 +104,10 @@ $result1 = mysqli_query($conn, $sql1);
             }
 
         } else {
-            echo "No Drivers In $search Yet. Come back soon!";
+            echo "No requests In $search Yet. Come back soon!";
         }
 
         $conn->close();
-
-        if (isset($_POST['hire'])) {
-            $con = new mysqli('localhost', 'root', 'root', 'drive_time');
-
-
-            $name = '' . $row1['name'] . '';
-            $business = '' . $row1['bname'] . '';
-            $driveremail = $_POST['email'];
-            $details = $_POST['details'];
-            $amount_offered = $_POST['price'];
-
-            $con->query("INSERT INTO request_trans (client_email, client_name, business, details, amount_offered, driveremail) VALUES ('$username', '$name','$business', '$details','$amount_offered','$driveremail');");
-
-        }
-
-
 
         ?>
     </main>
