@@ -45,7 +45,7 @@ $result1 = mysqli_query($conn, $sql1);
     <?php
     if($result1->num_rows > 0){
         $row1 = $result1->fetch_assoc();
-        echo '<p id="dashEmail"> ' . $row1['email'] . '</p>
+        echo '<p id="dashEmail">' . $row1['email'] . '</p>
                      <p id="dashName">' . $row1['name'] . '</p>';
     }else{
         echo 'We cant seem to pull your info';
@@ -121,7 +121,7 @@ $result1 = mysqli_query($conn, $sql1);
         $conn->close();
 
         if (isset($_POST['hire'])) {
-            $con = new mysqli('localhost', 'root', 'root', 'drive_time');
+            $con = new mysqli('localhost', 'root', 'password', 'drive_time');
 
 
             $name = '' . $row1['name'] . '';
@@ -133,7 +133,6 @@ $result1 = mysqli_query($conn, $sql1);
             $con->query("INSERT INTO request_trans (client_email, client_name, business, details, amount_offered, driveremail) VALUES ('$username', '$name','$business', '$details','$amount_offered','$driveremail');");
 
         }
-
 
 
         ?>
