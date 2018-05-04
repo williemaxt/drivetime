@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once 'connection.php';
+
+
 if(!isset($_SESSION))
 {
     header('Location:index.php');
@@ -17,6 +19,137 @@ $result = mysqli_query($conn, $sql);
 //variable for displaying the current users information
 $result1 = mysqli_query($conn, $sql1);
 //this will update the users information on the database
+
+
+
+
+
+
+if(isset($_POST['submit'])) {
+//creates variables for handling the first file
+    $file = $_FILES['medical'];
+    $fileName = $_FILES['medical']['name'];
+    $fileTmpName = $_FILES['medical']['tmp_name'];
+    $fileSize = $_FILES['medical']['size'];
+    $fileError = $_FILES['medical']['error'];
+    $fileType = $_FILES['medical']['type'];
+
+
+    //setting what extensions we want to allow
+    //exploding the values into an array
+    $fileExt = explode('.',$fileName);
+
+    //getting the extension
+    // and setting it to lower case
+    $fileActualExt = strtolower(end($fileExt));
+
+
+    //allowed files
+    $allowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+    //****************checking to see if the file we chose is allowed***********************
+    //checking for file errors
+    if(in_array($fileActualExt, $allowed)){
+        if($fileError === 0){
+            //this checks the file size in kb(kilobytes)
+            if($fileSize <= 2000000) {
+                //this variable will be equal to the new name of the file (unique id)
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                //this variable will be equal to the destination or folder of the file
+                $fileDestination = 'driverDocs/'.$fileNameNew;
+
+
+                //function that will move our uploaded file to its destination
+                move_uploaded_file($fileTmpName, $fileDestination);
+
+
+                $conn->query("UPDATE drivers SET medical ='$fileNameNew' WHERE email = '$username';");
+                header('Location: '.$_SERVER['REQUEST_URI']);
+                //now we can echo a success message or redirect them to a new page with header()
+                echo "Uploaded Successfully!";
+                //header("login1.php");
+
+            }
+            else{
+                echo "your file is too big";
+            }
+        }
+        else{
+            echo "There was an error uploading your file!";
+        }
+    }
+    else{
+        //checks for the specified file types
+        echo "you cannot upload this file type!";
+    }
+
+}
+
+
+
+
+if(isset($_POST['submitCrash'])) {
+//creates variables for handling the first file
+    $file = $_FILES['crash_report'];
+    $fileName = $_FILES['crash_report']['name'];
+    $fileTmpName = $_FILES['crash_report']['tmp_name'];
+    $fileSize = $_FILES['crash_report']['size'];
+    $fileError = $_FILES['crash_report']['error'];
+    $fileType = $_FILES['crash_report']['type'];
+
+
+    //setting what extensions we want to allow
+    //exploding the values into an array
+    $fileExt = explode('.',$fileName);
+
+    //getting the extension
+    // and setting it to lower case
+    $fileActualExt = strtolower(end($fileExt));
+
+
+    //allowed files
+    $allowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+    //****************checking to see if the file we chose is allowed***********************
+    //checking for file errors
+    if(in_array($fileActualExt, $allowed)){
+        if($fileError === 0){
+            //this checks the file size in kb(kilobytes)
+            if($fileSize <= 2000000) {
+                //this variable will be equal to the new name of the file (unique id)
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                //this variable will be equal to the destination or folder of the file
+                $fileDestination = 'driverDocs/'.$fileNameNew;
+
+
+                //function that will move our uploaded file to its destination
+                move_uploaded_file($fileTmpName, $fileDestination);
+
+
+                $conn->query("UPDATE drivers SET crash_report ='$fileNameNew' WHERE email = '$username';");
+                header('Location: '.$_SERVER['REQUEST_URI']);
+                //now we can echo a success message or redirect them to a new page with header()
+                echo "Uploaded Successfully!";
+                //header("login1.php");
+
+            }
+            else{
+                echo "your file is too big";
+            }
+        }
+        else{
+            echo "There was an error uploading your file!";
+        }
+    }
+    else{
+        //checks for the specified file types
+        echo "you cannot upload this file type!";
+    }
+
+}
+
+
+
 
 
 ?>
@@ -160,9 +293,10 @@ $result1 = mysqli_query($conn, $sql1);
                 <h1>Update Field</h1>
                 <p>Medical</p>
                 <input type="file" name="medical">
+                <input class="submitBtn" type="submit" name="submit" value="submit">
                 <p>Crash Report</p>
                 <input type="file" name="crash_report">
-                <input class="submitBtn" type="submit" name="submit" value="submit">
+                <input class="submitBtn" type="submit" name="submitCrash" value="submit">
                 <br>
             </form>
         </div>
@@ -191,7 +325,7 @@ $result1 = mysqli_query($conn, $sql1);
                 <input type="submit" name="accept" value="accept">
                 </form>     
                 </div>';
-            // added inputs for each row so that it can pull without the loop. They are hidden. 
+
             }
 
         } else {
@@ -204,13 +338,13 @@ $result1 = mysqli_query($conn, $sql1);
 
             $client_email = $_POST['email'];
             $client_name = $_POST['client_name'];
-            $business = $_POST['business']; 
+            $business = $_POST['business']; //use the row.
             $details = $_POST['details'];
             $amount_offered = $_POST['amount_offered'];
 
 
             $con->query("INSERT INTO transactions (client_email, client_name, business, details, amount_offered, driver_email) VALUES ('$client_email', '$client_name', '$business', '$details', '$amount_offered', '$username');");
-
+            exit();
         }
 
 
