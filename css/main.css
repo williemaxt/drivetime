@@ -126,7 +126,7 @@ nav a {
   color: #ffffff;
 }
 #imgHome{
-  background-image: url(../images/machine.jpg);
+  background-image: url(../images/dark-light-blur.jpg);
   background-size:cover;
   background-color: #000000; // Tint
   background-blend-mode: multiply;
@@ -296,7 +296,7 @@ aside{
   width: 70px;
 }
 #imgHomeBottom{
-  background-image: url(../images/top_down.jpg);
+  background-image: url(../images/overheadTrucks.jpg);
   margin-bottom: 0px;;
 }
 .footerBottom{
@@ -319,7 +319,7 @@ aside{
   main{
     float: none;
     width: 100%;
-  }
+  }../images/overheadTrucks.jpg
   .iconUl{
   }
   .iconUl li{
@@ -406,3 +406,4 @@ aside{
     font-family: 'Nunito', sans-serif;
   }
 }
+
