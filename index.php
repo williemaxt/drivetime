@@ -24,6 +24,8 @@
         </ul>
       </nav>
     </header>
+    <!--Divider between the navigation and image-->
+    <div style="width:100%; height:5px; background:#ffffff;"></div>
 
     <div id="imgHome"class="imgHeader">
       <div class="imgText">
@@ -33,13 +35,14 @@
       </div>
 
     </div>
+    <!--Divider between the navigation and image-->
+    <div style="width:100%; height:5px; background:#ffffff;"></div>
 
 <div id="homeBar" class="bar">
   <ul>
     <li><p>Drive Today! >></p></li>
     <li><button class="transparent-button">Sign Up</button></li>
   </ul>
-
 </div>
     <!--Wrapper for properly formating content-->
 <div class="wrapper">
@@ -125,6 +128,8 @@
     <li><button class="transparent-button">Sign up</button></li>
   </ul>
 </div>
+<!--Divider between the navigation and image-->
+<div style="width:100%; height:5px; background:#ffffff;"></div>
 <div id="imgHomeBottom"class="imgHeader">
   <div class="imgText">
     <h1>See How We Work</h1>
@@ -132,7 +137,7 @@
     <button class="button" name="button">See Pictures</button>
   </div>
 </div>
-<div id="bottomLine"></div>
+
 <footer>
   <div class="wrapper">
     <ul>
