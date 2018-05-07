@@ -108,6 +108,7 @@ footer{
   background: #333333;
   margin: 0px auto;
   color: #ffffff;
+  font-family: 'Ubuntu', sans-serif;
 }
 footer ul{
   list-style: none;
@@ -181,6 +182,7 @@ main{
   width: 70%;
   color: #808080;
   padding: 10px;
+  font-family: 'Ubuntu', sans-serif;
 }
 .iconUl{
   list-style: none;
@@ -201,6 +203,7 @@ aside{
   width: 25%;
   color: #808080;
   padding: 10px;
+  font-family: 'Ubuntu', sans-serif;
 }
 .aside img{
   width: 100%;
@@ -210,21 +213,21 @@ aside{
   width: 100%;
   height: 40px;
   margin-bottom: 10px;
-  border-radius: 3px;
-  border: none;
-  background: #808080;
+  border-radius: 2px;
+  border: 3px solid #333333;
+  background: #ffffff;
   font-size: 1.7em;
-  color: #ffffff;
+  color: #333333;
 }
 .aside textarea{
   margin: 0px auto;
   width: 99%;
   height: 80px;
-  border-radius: 3px;
-  border: none;
-  background: #808080;
+  border-radius: 2px;
+  border: 3px solid #333333;
+  background: #ffffff;
   font-size: 1.7em;
-  color: #ffffff;
+  color: #333333;
 }
 .aside button{
   width: 100%;
@@ -233,7 +236,7 @@ aside{
 
 #secondBar{
   clear: both;
-  background: #808080;
+  background: #333333;
   font-family: 'Ubuntu', sans-serif;
   padding-top: 30px;
   padding-bottom: 50px;
@@ -243,6 +246,7 @@ aside{
 }
 #secondBar p{
   font-size: .6em;
+  padding: 15px;
 }
 #secondBar ul{
   list-style: none;
@@ -250,19 +254,23 @@ aside{
 }
 #secondBar img{
   width: 100%;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 }
 #secondBar li{
   width: 20%;
   display: inline-block;
   font-size: 1em;
   background: #ffffff;
-  padding: 10px;
   color: #808080;
   min-height: 500px;
   margin-top: 0px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 40px 10px #000000;
 }
 #secondBar section{
-  width: 100%
+  width: 100%;
+  border-radius: 5px;
 }
 .prompt{
   text-align: center;
@@ -276,6 +284,7 @@ aside{
   margin: 0;
   padding: 0;
   padding-top: 20px;
+  font-family: 'Ubuntu', sans-serif;
 }
 #testimonies ul{
   list-style: none;
@@ -347,6 +356,7 @@ aside{
     width: 80%;
     margin-top: 15px;
     margin: 0;
+    margin-bottom: 40px;
   }
   .iconUl li{
     width: 45%;
@@ -377,6 +387,7 @@ aside{
     margin-top: 15px;
     margin-bottom: 10px;
     margin: 0;
+    margin-bottom: 40px;
   }
   .iconUl li{
     width: 300px;
@@ -406,4 +417,3 @@ aside{
     font-family: 'Nunito', sans-serif;
   }
 }
-
