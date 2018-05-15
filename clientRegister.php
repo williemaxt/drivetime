@@ -16,13 +16,14 @@ if(isset($_POST['submit'])) {
      if ($password != $cPassword)
      $msg = "Passwords do not match.";
     else {
-        
-        $con->query("INSERT INTO clients (name, email, number, password) VALUES ('$name', '$email', '$number', '$hash')");
+
+        $con->query("INSERT INTO clients (name, email, number, password, bname, baddr) VALUES ('$name', '$email', '$number', '$hash','$bname','$baddr');");
         $msg = "You have been registered!"; }
-        
+
     header('chooseAccess.php');
 
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,11 +49,14 @@ if(isset($_POST['submit'])) {
           <p>Business Address</p>
           <input type="text" autocomplete="off" name="baddr">
           <p>Password</p>
-          <input type="password" minlength="8" autocomplete="off" name="password">
+          <input type="password" minlength="8" autocomplete="off" name="password" id="pwd" class="masked" >
+          <button type="button" id="eye"> Show Password
+          <img src="https://cdn0.iconfinder.com/data/icons/feather/96/eye-16.png" alt="eye"/>
+          </button>
           <p>Confirm Password</p>
           <input type="password" minlength="8" autocomplete="off" name="cPassword">
           <input class="submitBtn" type="submit" name="submit" value="Submit">
       </form>
-
   </body>
+  <script src="js/func.js"></script>
 </html>
