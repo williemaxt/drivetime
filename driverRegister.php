@@ -1,5 +1,7 @@
 <?php
 
+
+
 $con = new mysqli('localhost','root','root','drive_time');
 
 $name = $con->real_escape_string($_POST['name']);
@@ -19,7 +21,7 @@ if ($password != $cPassword)
 else {
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $con->query("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$cdl','$city', '$experience', '$state', '$medical', '$crash_report')");
-    
+
 }
 ?>
 <!DOCTYPE html>
@@ -33,6 +35,7 @@ else {
 <body>
 <br>
 
+
 <form id="registerDriverForm" method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
     <h1>Register To Drive</h1>
     <p>Full Name</p>
@@ -42,9 +45,12 @@ else {
     <p>Phone</p>
     <input type="number" autocomplete="off" name="number">
     <p>Password</p>
-    <input type="password" minlength="8" autocomplete="off" name="password">
+    <input type="password" minlength="8" autocomplete="off" name="password" id="pwd" class="masked" >
+    <button type="button" id="eye"> Show Password
+    <img src="https://cdn0.iconfinder.com/data/icons/feather/96/eye-16.png" alt="eye" />
+    </button>
     <p>Confirm Password</p>
-    <input type="password" minlength="8" autocomplete="off" name="cPassword">
+    <input type="password" minlength="8" autocomplete="off" name="cPassword" id="pwd" class="masked">
     <p>CDL #</p>
     <input type="text" autocomplete="off" name="cdl">
     <p>Current City</p>
@@ -105,7 +111,9 @@ else {
         <option value="WV">West Virginia</option>
         <option value="WI">Wisconsin</option>
         <option value="WY">Wyoming</option>
+        <input class="submitBtn" type="submit" name="submit" value="Submit">
     </select>
 </form>
 </body>
+<script src="js/func.js"></script>
 </html>
