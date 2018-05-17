@@ -67,7 +67,7 @@ if(isset($_POST['submit'])) {
 
             }
             else{
-                echo "your file is too big";
+                echo "Your file is too large.";
             }
         }
         else{
@@ -76,7 +76,7 @@ if(isset($_POST['submit'])) {
     }
     else{
         //checks for the specified file types
-        echo "you cannot upload this file type!";
+        echo "You cannot upload this file type!";
     }
 
 }
@@ -130,7 +130,7 @@ if(isset($_POST['submitCrash'])) {
 
             }
             else{
-                echo "your file is too big";
+                echo "Your file is too large.";
             }
         }
         else{
@@ -139,13 +139,71 @@ if(isset($_POST['submitCrash'])) {
     }
     else{
         //checks for the specified file types
-        echo "you cannot upload this file type!";
+        echo "You cannot upload this file type!";
     }
 
 }
 
 
+if(isset($_POST['submitCdl'])) {
+//creates variables for handling the first file
+    $file = $_FILES['cdl'];
+    $fileName = $_FILES['cdl']['name'];
+    $fileTmpName = $_FILES['cdl']['tmp_name'];
+    $fileSize = $_FILES['cdl']['size'];
+    $fileError = $_FILES['cdl']['error'];
+    $fileType = $_FILES['cdl']['type'];
 
+
+    //setting what extensions we want to allow
+    //exploding the values into an array
+    $fileExt = explode('.',$fileName);
+
+    //getting the extension
+    // and setting it to lower case
+    $fileActualExt = strtolower(end($fileExt));
+
+
+    //allowed files
+    $allowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+    //****************checking to see if the file we chose is allowed***********************
+    //checking for file errors
+    if(in_array($fileActualExt, $allowed)){
+        if($fileError === 0){
+            //this checks the file size in kb(kilobytes)
+            if($fileSize <= 2000000) {
+                //this variable will be equal to the new name of the file (unique id)
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                //this variable will be equal to the destination or folder of the file
+                $fileDestination = 'driverDocs/'.$fileNameNew;
+
+
+                //function that will move our uploaded file to its destination
+                move_uploaded_file($fileTmpName, $fileDestination);
+
+
+                $conn->query("UPDATE drivers SET cdl ='$fileNameNew' WHERE email = '$username';");
+                header('Location: '.$_SERVER['REQUEST_URI']);
+                //now we can echo a success message or redirect them to a new page with header()
+                echo "Uploaded Successfully!";
+                //header("login1.php");
+
+            }
+            else{
+                echo "Your file is too large.";
+            }
+        }
+        else{
+            echo "There was an error uploading your file!";
+        }
+    }
+    else{
+        //checks for the specified file types
+        echo "You cannot upload this file type!";
+    }
+
+}
 
 
 ?>
@@ -157,7 +215,6 @@ if(isset($_POST['submitCrash'])) {
     <title>Drive Time</title>
     <link rel="stylesheet" href="css/dash.css">
 </head>
-
 <body>
 
 <nav id="navbar">
@@ -182,12 +239,14 @@ if(isset($_POST['submitCrash'])) {
         <?php
         if($result1->num_rows > 0){
             echo '
-                <p>NAME: ' . $row1['name'] . '</p>
-                <p>EMAIL: ' . $row1['email'] . '</p>
-                <p>PHONE: ' . $row1['number'] . '</p>
-                <p>STATE: ' . $row1['state'] . '</p>
+                <p>Name: ' . $row1['name'] . '</p>
+                <p>Email: ' . $row1['email'] . '</p>
+                <p>Phone: ' . $row1['number'] . '</p>
+                <p>State: ' . $row1['state'] . '</p>
+                <p>CDL Expiration: ' .$row1['cdl_expire'] . '</p>
                 <p>Medical: <a href="driverDocs/' . $row1['medical'] . '" target="_blank">View</a></p>
                 <p>Crash Rep: <a href="driverDocs/' . $row1['crash_report'] . '" target="_blank">View</a></p>
+                <p>CDL: <a href="driverDocs/' . $row1['cdl'] . '" target="_blank">View</a></p>
                 <img id="infoBtn" src="images/pencil.svg">
                 <img id="filesBtn" src="images/document.svg">';
         }else{
@@ -198,25 +257,25 @@ if(isset($_POST['submitCrash'])) {
      ?>
     </aside>
 
-    <!-- The Modal The Modal For Account Info-->
+    <!-- The Modal For Account Info-->
     <div id="infoModal" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
 
-            <form id=" " method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
+            <form id="" method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
                 <h1>Update Account</h1>
                 <p>Full Name</p>
                 <input type="text" minlength="3" name="name">
                 <p>Phone</p>
                 <input type="number" maxlength="10" name="number">
-                <p>CDL #</p>
-                <input type="text" name="cdl">
                 <p>Current City</p>
                 <input type="text" name="city">
                 <p>Years of Experience</p>
                 <input type="number" name="experience">
+                <p>CDL Expiration Date</p>
+                <input type="date" name="cdl_expire">
                 <p>Current State</p>
                 <select name="state" id="state">
                     <option selected="selected">Select a State</option>
@@ -283,17 +342,14 @@ if(isset($_POST['submitCrash'])) {
 
         $name = $_POST['name'];
         $number = $_POST['number'];
-        //$cdl = $_POST['cdl']; // WE MUST MAKE CDL A FILE UPLOAD.
         $city = $_POST['city'];
         $experience = $_POST['experience'];
         $state = $_POST['state'];
-        $conn->query("UPDATE drivers SET name = '$name', number = '$number', city = '$city', experience = '$experience', state = '$state' WHERE email = '$username';");
+        $cdl_expire = $_POST['cdl_expire'];
+        $conn->query("UPDATE `drivers` SET name = '$name', city = '$city', experience = '$experience', state = '$state', cdl_expire = '$cdl_expire' WHERE email = '$username';");
+        header('Location: '.$_SERVER['REQUEST_URI']);
 
-    } else {
-
-        echo 'Invalid Request.';
     }
-
     ?>
 
     <!--End of modal-->
@@ -304,7 +360,7 @@ if(isset($_POST['submitCrash'])) {
         <div class="modal-content">
             <span class="closeFiles">&times;</span>
 
-            <form id=" " method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
+            <form id="" method="post" action="<?php echo $_SERVER['PHP_SELF']?>" enctype="multipart/form-data">
                 <h1>Update Field</h1>
                 <p>Medical</p>
                 <input type="file" name="medical">
@@ -312,6 +368,9 @@ if(isset($_POST['submitCrash'])) {
                 <p>Crash Report</p>
                 <input type="file" name="crash_report">
                 <input class="submitBtn" type="submit" name="submitCrash" value="submit">
+                <p>CDL</p>
+                <input type="file" name="cdl">
+                <input class="submitBtn" type="submit" name="submitCdl" value="submit">
                 <br>
             </form>
         </div>
@@ -337,7 +396,8 @@ if(isset($_POST['submitCrash'])) {
                 <input  type="hidden" name="details"  value="' . $row['details'] . '">
                 <input  type="hidden" name="business"  value="' . $row['business'] . '">
                 <input  type="hidden" name="amount_offered"  value="' . $row['amount_offered'] . '">
-                <input type="submit" name="accept" value="accept">
+                <input type="hidden" name="id" value="'. $row['id'].'">
+                <input type="submit" name="accept" value="Accept">
                 </form>     
                 </div>';
 
@@ -349,23 +409,52 @@ if(isset($_POST['submitCrash'])) {
 
 
         if (isset($_POST['accept'])) {
-            $con = new mysqli('localhost', 'root', 'root', 'drive_time');
+
 
             $client_email = $_POST['email'];
             $client_name = $_POST['client_name'];
             $business = $_POST['business']; //use the row.
             $details = $_POST['details'];
             $amount_offered = $_POST['amount_offered'];
+            $id = $_POST['id'];
 
 
-            $con->query("INSERT INTO transactions (client_email, client_name, business, details, amount_offered, driver_email) VALUES ('$client_email', '$client_name', '$business', '$details', '$amount_offered', '$username');");
+
+            $conn->query("INSERT INTO transactions (client_email, client_name, business, details, amount_offered, driver_email) VALUES ('$client_email', '$client_name', '$business', '$details', '$amount_offered', '$username');");
+            $conn->query("DELETE FROM request_trans WHERE id=$id");
+            echo "<meta http-equiv='refresh' content='0'>";
             exit();
+
+
         }
 
 
-        $conn->close();
-        ?>
 
+date_default_timezone_set('America/New_York');
+//$nextThursday = strtotime("next year, 2019-12-05");
+
+$nextExpire = strtotime($row1['cdl_expire']);
+
+//$remaining = $nextThursday - time();
+$days_remaining = floor($nextExpire / 86400); //Dividing between the number of seconds in a day to get number of days
+
+
+if($days_remaining > 0) {
+
+    echo "<h3 style='color: green'>Active</h3>";
+
+
+} else {
+
+    echo "<h3 style='color: red'>Expired</h3>";
+
+}
+
+
+$conn->close();
+
+
+?>
     </main>
 </div>
 </body>
