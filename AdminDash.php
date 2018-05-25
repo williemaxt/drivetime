@@ -7,7 +7,6 @@ if(!isset($_SESSION))
     header('Location:index.php');
     exit;
 }
-
 //Search bar logic
 if(empty($_POST['keyword'])){
     $sql  = 'SELECT * FROM transactions';
@@ -38,15 +37,15 @@ if(empty($_POST['keyword'])){
         <h1>Search</h1>
         <!--Searchbar elements-->
         <form class="searchBar" method="post" action="AdminDash.php">
-            <input type="text" name="keyword" placeholder="Search by buisness (verbatim)">
+            <input type="text" name="keyword" placeholder="Search by email">
             <button type="submit" name="submit"><i class="fa fa-search"></i></button>
         </form>
         <br>
     </aside>
     <!--Main content-->
-    <main>
+    <main id="admin-main">
 
-            <h2>&nbsp; &nbsp; &nbsp; ID &nbsp; &nbsp; &nbsp; Client Email &nbsp; &nbsp; Client Name &nbsp;  &nbsp;  &nbsp;Business &nbsp; &nbsp; &nbsp; &nbsp; Driver &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Timestamp  </h2>
+            <h2>&nbsp; &nbsp; &nbsp; Client Email &nbsp; &nbsp; Client Name &nbsp;  &nbsp;  &nbsp;Business &nbsp; &nbsp; &nbsp; &nbsp; Driver &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Timestamp  </h2>
 
         <?php
 
@@ -54,21 +53,22 @@ if(empty($_POST['keyword'])){
         $result = $conn->query($sql);
 
 
-        $id = "SELECT id FROM transactions";
-
         if ($result->num_rows > 0) {
             // output data of each row in the database and displays it as a card
             while($row = $result->fetch_assoc()) {
-                echo "<div class='admin-card'>
+                echo "
+                      <form method='post'>
+                      <div class='admin-card'>
                       <div class='admin-content'>
-                       <p>". $row["id"]." </p>
                        <p>". $row["client_email"]."</p>
                        <p>" . $row["client_name"] ." </p>
                        <p>" . $row["business"] . "</p>
                        <p>" . $row["driver_email"] ."</p>
                        <p>" . $row["timestamp"] . "</p>
                        </div>
-                       <a href='delete.php?del=<?php echo $id ?>'> <button type='button' name='button'>Delete</button></a>
+                       <a href='' name='delete'><button type='submit' name='delete'>Delete</button></a>
+                      <input  name='id' type='hidden' value=" . $row["id"] . "> 
+                      </form>
                        </div>
                        <br>" ;
             }
@@ -76,11 +76,16 @@ if(empty($_POST['keyword'])){
             echo "No Transactions for $search Yet. Come back soon!";
         }
 
+        if(isset($_POST['delete'])){
 
-     //Will add code to pull from transactions sql db.
-     //Show results as Client Email, Client Name, Business, Driver Email, Timestamp. Optionally Amount offered.
-        $conn->close();
-     ?>
+            $id = $_POST['id'];
+
+            $conn->query("DELETE FROM transactions WHERE id='$id'");
+            echo "<meta http-equiv='refresh' content='0'>";
+            exit();
+
+        }
+?>
     </main>
 </div>
 </body>
