@@ -2,7 +2,6 @@
 session_start();
 include_once 'connection.php';
 
-
 if(!isset($_SESSION))
 {
     header('Location:index.php');
@@ -276,6 +275,15 @@ if(isset($_POST['submitCdl'])) {
                 <input type="number" name="experience">
                 <p>CDL Expiration Date</p>
                 <input type="date" name="cdl_expire">
+                <p>Choose your license type</p>
+               
+                // Need to get names for the types of licenses.
+                // Replace Type A, Type B, Type C.
+                
+                <input type="checkbox" name="ids[]" value="Type A ">
+                <input type="checkbox" name="ids[]" value="Type B ">
+                <input type="checkbox" name="ids[]" value="Type C ">
+                
                 <p>Current State</p>
                 <select name="state" id="state">
                     <option selected="selected">Select a State</option>
@@ -346,7 +354,9 @@ if(isset($_POST['submitCdl'])) {
         $experience = $_POST['experience'];
         $state = $_POST['state'];
         $cdl_expire = $_POST['cdl_expire'];
-        $conn->query("UPDATE `drivers` SET name = '$name', city = '$city', experience = '$experience', state = '$state', cdl_expire = '$cdl_expire' WHERE email = '$username';");
+
+        $ids = implode(",",$_POST["ids"]);
+        $conn->query("UPDATE `drivers` SET name = '$name', city = '$city', experience = '$experience', state = '$state', cdl_expire = '$cdl_expire', checkbox = '$ids' WHERE email = '$username';");
         header('Location: '.$_SERVER['REQUEST_URI']);
 
     }
@@ -418,17 +428,14 @@ if(isset($_POST['submitCdl'])) {
             $amount_offered = $_POST['amount_offered'];
             $id = $_POST['id'];
 
-
-
+            
             $conn->query("INSERT INTO transactions (client_email, client_name, business, details, amount_offered, driver_email) VALUES ('$client_email', '$client_name', '$business', '$details', '$amount_offered', '$username');");
             $conn->query("DELETE FROM request_trans WHERE id=$id");
             echo "<meta http-equiv='refresh' content='0'>";
             exit();
-
-
+            
         }
-
-
+        
 
 date_default_timezone_set('America/New_York');
 //$nextThursday = strtotime("next year, 2019-12-05");
