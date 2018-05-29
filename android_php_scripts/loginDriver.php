@@ -1,35 +1,34 @@
 <?php
-ob_start();
-require "init.php";
-//this will remove error reporting
-error_reporting(0);
-//this section of the code has been written with "isset" to prevent "Undefined index" error
-$user_name = isset($_POST["login_name"]) ? $_POST["login_name"]: '';
-$user_pass = isset($_POST["login_pass"]) ? $_POST["login_pass"]: '';
-//this will hash our password string so that the query can compare it
+    require "init.php";
+    error_reporting(0);
+    $user_name = isset($_POST["login_name"]) ? $_POST["login_name"]: '';
+    $user_pass = isset($_POST["login_pass"]) ? $_POST["login_pass"]: '';
+  $sql = "select * from drivers where email = '".$user_name."'";
+  $rs = mysqli_query($con,$sql);
+  $numRows = mysqli_num_rows($rs);
+  if($numRows  == 1){
+      $row = mysqli_fetch_assoc($rs);
+      if(password_verify($user_pass,$row['password'])){
+        //IF THE PASSWORD IS CORRECT
+        //SELECT ALL FROM USER WITH SPECIFIED EMAIL
+        $sql_query = "SELECT * FROM drivers WHERE email LIKE '$user_name';";
+        //THIS VARIABLE IS EQUAL TO THE RESULT OF THE QUERY
+        $result = mysqli_query($con,$sql_query);
+        if(mysqli_num_rows($result) >0)
+        {
+          //Get the id of the data
+          	$id = $_GET["id"];
 
-$sql_query = "select * from drivers where email like '$user_name' and password like '$user_pass';";
-
-$result = mysqli_query($con,$sql_query);
-
-if(mysqli_num_rows($result) >0 )
-{
-
-  //Get the id of the data
-  	$id = $_GET["id"];
-
-    while ($row = mysqli_fetch_assoc($result)) {
-      //naming the array
-  		$array[] = $row;
-  	}
-
-    ob_end_flush();
-    error_reporting( error_reporting() & ~E_NOTICE );
-    echo json_encode($array);
-
-}
-else
-{
-echo "Login Failed.......Try Again..";
-}
+            while ($row = mysqli_fetch_assoc($result)) {
+              //naming the array
+          		$array[] = $row;
+          	}
+            //echoing the json array to the device
+            echo json_encode($array);
+        }
+      }
+      else{
+          echo "Either your email or password are incorrect. Please try again.";
+      }
+  }
 ?>
