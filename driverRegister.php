@@ -1,32 +1,32 @@
 <?php
 
+include_once 'connection.php';
 
-
-$con = new mysqli('localhost','root','root','drive_time');
-
-$name = $con->real_escape_string($_POST['name']);
-$email = $con->real_escape_string($_POST['email']);
-$number = $con->real_escape_string($_POST['number']);
-$cdl = $con->real_escape_string($_POST['cdl']);
-$city = $con->real_escape_string($_POST['city']);
-$experience = $con->real_escape_string($_POST['experience']);
-$state = $con->real_escape_string($_POST['state']);
-$medical = $con->real_escape_string($_POST['medical']);
-$crash_report = $con->real_escape_string($_POST['crash_report']);
-$password = $con->real_escape_string($_POST['password']);
-$cPassword = $con->real_escape_string($_POST['cPassword']);
+if(isset($_POST['submit'])) {
+    
+    
+$name = $conn->real_escape_string($_POST['name']);
+$email = $conn->real_escape_string($_POST['email']);
+$number = $conn->real_escape_string($_POST['number']);
+$city = $conn->real_escape_string($_POST['city']);
+$experience = $conn->real_escape_string($_POST['experience']);
+$state = $conn->real_escape_string($_POST['state']);
+$password = $conn->real_escape_string($_POST['password']);
+$cPassword = $conn->real_escape_string($_POST['cPassword']);
 
 if ($password != $cPassword)
     $msg = "Passwords do not match.";
 else {
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $con->query("INSERT INTO drivers (name, email, number, password, cdl, city, experience, state, medical, crash_report) VALUES ('$name', '$email', '$number', '$hash', '$cdl','$city', '$experience', '$state', '$medical', '$crash_report')");
-
+    $conn->query("INSERT INTO drivers (name, email, number, password,  city, experience, state) VALUES ('$name', '$email', '$number', '$hash', '$city', '$experience', '$state');");
+        header('Location: login1.php');
+}
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Drive</title>
     <link rel="stylesheet" href="css/main.css">
@@ -51,8 +51,6 @@ else {
     </button>
     <p>Confirm Password</p>
     <input type="password" minlength="8" autocomplete="off" name="cPassword" id="pwd" class="masked">
-    <p>CDL #</p>
-    <input type="text" autocomplete="off" name="cdl">
     <p>Current City</p>
     <input type="text" autocomplete="off" name="city">
     <p>Years of Experience</p>
