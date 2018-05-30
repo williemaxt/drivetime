@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include_once 'connection.php';
 
 if(!isset($_SESSION))
@@ -31,6 +31,7 @@ $result1 = mysqli_query($conn, $sql1);
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Drive Time</title>
     <link rel="stylesheet" href="css/dash.css">
@@ -76,42 +77,37 @@ $result1 = mysqli_query($conn, $sql1);
     </aside>
     <!--Main content-->
     <main>
-    <h1>These are your accepted requests. You may contact them via email!</h1>
+    <h1>These are your accepted requests. You may now contact them via email or phone!</h1>
         <?php
 
 
         if ($result->num_rows > 0) {
-
-            // output data of each row in the database and displays it as a card
-            //$row = $result->fetch_assoc();
-            //$experience = ''. $row['experience'] .'';
 
             while ($row = $result->fetch_assoc()) {
 
 
                 echo '<div class="driver-card">  
             <form action="clientdash.php" method="post">
-            <h1>' . $row['client_name'] . '</h1>
-            <p>Email: ' . $row['client_email'] . '</p>
-            <p>Business: ' . $row['business'] . '</p>
+            <h1>' . $row['driver_email'] . '</h1>
             <p>Details: '. $row['details']. '</p>
             <p>Price: ' . $row['amount_offered'] . '</p>
-            <p>Driver Email: ' . $row['driver_email'] . '</p>     
+            <p>Your Email: ' . $row['client_email'] . '</p>  
+            <p>Driver Email: ' . $row['driver_email'] . '</p>   
             </form>
-
             </div>';
 
             }
 
         } else {
-            echo "No requests In $search Yet. Come back soon!";
+            echo "No requests yet. Come back soon!";
         }
 
         $conn->close();
-
         ?>
     </main>
 </div>
 </body>
+<script src="js/index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/dash.js"></script>
 </html>
