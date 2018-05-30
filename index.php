@@ -1,7 +1,14 @@
+<?php
+include_once 'connection.php';
+$sql  = 'SELECT * FROM home';
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drive Time</title>
     <link rel="stylesheet" href="css/main.css">
   </head>
@@ -19,7 +26,7 @@
           <li><a>Home</a></li>
           <li><a href="clientRegister.php">Clients</a></li>
           <li><a href="driverRegister.php">Drivers</a></li>
-          <li><a>Info</a></li>
+          <li><a href="info.php">Info</a></li>
           <li><a href="chooseAccess.php">Login</a></li>
         </ul>
       </nav>
@@ -29,9 +36,9 @@
 
     <div id="imgHome"class="imgHeader">
       <div class="imgText">
-        <h1>Pro Drive Time</h1>
-        <p>Professional drivers at a moments notice</p>
-        <button class="button" name="button">Learn More</button>
+        <h1><?php echo $row["title"];?></h1>
+        <p><?php echo $row["sub_paragraph"];?></p>
+        <a href="info.php"><button class="button" name="button">Learn More</button></a>
       </div>
 
     </div>
@@ -41,7 +48,7 @@
 <div id="homeBar" class="bar">
   <ul>
     <li><p>Drive Today! >></p></li>
-    <li><button class="transparent-button">Sign Up</button></li>
+    <li><a href="driverRegister.php"><button class="transparent-button">Sign Up</button></a></li>
   </ul>
 </div>
     <!--Wrapper for properly formating content-->
@@ -49,23 +56,23 @@
   <main>
     <ul class="iconUl">
       <li><img src="images/id-card.svg">
-      <h1>Commercial Drivers</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
+      <h1><?php echo $row["text1"];?></h1>
+      <p><?php echo $row["textarea1"];?></p>
     </li>
 
     <li><img src="images/shipped.svg">
-    <h1>Special Liscenses</h1>
-    <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
+    <h1><?php echo $row["textarea3"];?></h1>
+    <p><?php echo $row["textareatext"];?></p>
   </li>
 
   <li><img src="images/signing-the-contract.svg">
-  <h1>Your Contractor</h1>
-  <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
+  <h1><?php echo $row["textareatext1"];?></h1>
+  <p><?php echo $row["textareatext2"];?></p>
 </li>
 
 <li><img src="images/payment-method.svg">
-<h1>Hire On Short Notice</h1>
-<p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
+<h1><?php echo $row["textareatext3"];?></h1>
+<p><?php echo $row["name22"];?></p>
 </li>
     </ul>
   </main>
@@ -85,20 +92,20 @@
   <ul>
     <li><section>
       <img src="images/worker.jpg" alt="">
-      <h1>What Our Goals Are</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
+      <h1><?php echo $row["name23"];?></h1>
+      <p><?php echo $row["name24"];?></p>
     </section></li>
 
     <li><section>
       <img src="images/worker.jpg" alt="">
-      <h1>What Our Goals Are</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
+      <h1><?php echo $row["name25"];?></h1>
+      <p><?php echo $row["name26"];?></p>
     </section></li>
 
     <li><section>
       <img src="images/worker.jpg" alt="">
-      <h1>What Our Goals Are</h1>
-      <p>“Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem.</p>
+      <h1><?php echo $row["name27"];?></h1>
+      <p><?php echo $row["comment1"];?></p>
     </section></li>
   </ul>
 </div>
@@ -107,25 +114,25 @@
 <ul id="reviews">
   <li>
     <img src="images/man-user.svg" alt="">
-    <h1>Marcelle</h1>
-    <p>"This is one of the best companies I have ever contracted. Would easily give them 5 stars"</p>
+    <h1><?php echo $row["comment2"];?></h1>
+    <p>"<?php echo $row["comment3"];?>"</p>
   </li>
   <li>
     <img src="images/man-user.svg" alt="">
-    <h1>Marcelle</h1>
-    <p>"This is one of the best companies I have ever contracted. Would easily give them 5 stars"</p>
+    <h1><?php echo $row["comment4"];?></h1>
+    <p>"<?php echo $row["comment5"];?>"</p>
   </li>
   <li>
     <img src="images/man-user.svg" alt="">
-    <h1>Marcelle</h1>
-    <p>"This is one of the best companies I have ever contracted. Would easily give them 5 stars"</p>
+    <h1><?php echo $row["comment6"];?></h1>
+    <p>"<?php echo $row["comment7"];?>"</p>
   </li>
 </ul>
 </div><!--End of the second wrapper-->
 <div id="homeBar" class="bar">
   <ul>
     <li><p>Hire Today! >></p></li>
-    <li><button class="transparent-button">Sign up</button></li>
+    <li><a href="clientRegister.php"><button class="transparent-button">Sign up</button></a></li>
   </ul>
 </div>
 <!--Divider between the navigation and image-->
@@ -142,20 +149,20 @@
   <div class="wrapper">
     <ul>
       <li>
-        <h1>About Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
+        <h1><?php echo $row["footer1"];?></h1>
+        <p><?php echo $row["footer2"];?></p>
       </li>
       <li>
-        <h1>Follow Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
+        <h1><?php echo $row["footer3"];?></h1>
+        <?php echo $row["footer4"];?>
       </li>
       <li>
-        <h1>Follow Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
+        <h1><?php echo $row["footer5"];?></h1>
+        <?php echo $row["footer6"];?>
       </li>
       <li>
-        <h1>Follow Us</h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum repellat, maxime vel alias impedit veritatis temporibus, sequi quos veniam eius optio corporis modi dicta molestias at inventore culpa, natus explicabo.
+        <h1><?php echo $row["footer7"];?></h1>
+        <?php echo $row["footer8"];?>
       </li>
     </ul>
   </div>
@@ -164,6 +171,6 @@
 </div>
 </footer>
   </body>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="js/index.js"></script>
 </html>
