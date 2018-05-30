@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Megrim');
 body{
-    background-image: url(../images/blured.jpg);
+    background-image: url(../images/dark-light-blur.jpg);
     background-size:cover;
     margin: 0px;
+    font-family: 'Ubuntu', sans-serif;
 }
 /*Quick link style*/
 .quickHeader{
@@ -30,12 +33,16 @@ body{
 #choiceDiv{
     max-width: 350px;
     height: 400px;
-    background: #232323;
+    background: #ffffff;
+    box-shadow: 0px 0px 40px 10px #000000;
     margin: 0px auto;
     margin-top: 100px;
     border-radius: 5px;
+    font-size: 2em;
+    font-family: 'Ubuntu', sans-serif;
 }
-form{   
+form{
+  font-family: 'Ubuntu', sans-serif;
  padding: 10px;
     max-width: 400px;
     margin: 0px auto;
@@ -50,11 +57,12 @@ form input{
     border-radius: 3px;
     border:none;
     font-size: 1.5em;
-    
+
 }
 .submitBtn{
     background: #eca217;
     color: #ffffff;
+    font-family: 'Ubuntu', sans-serif;
 }
 .submitBtn:hover{
     background: #333333;
@@ -65,6 +73,7 @@ form input{
     background: #c0c0c0;
 }
 #loginForm h1{
+    font-family: 'Ubuntu', sans-serif;
     text-align: center;
     margin: 0;
     padding: 10px;
