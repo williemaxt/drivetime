@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
 if(!empty($sessData['status']['msg'])){
     $statusMsg = $sessData['status']['msg'];
@@ -7,6 +7,10 @@ if(!empty($sessData['status']['msg'])){
     unset($_SESSION['sessData']['status']);
 }
 ?>
+<html>
+    <head>  
+    <link rel="stylesheet" href="css/forms.css">
+    </head>
     <h2>Enter the Email associated with your account to Reset Password</h2>
 <?php echo !empty($statusMsg)?'<p class="'.$statusMsgType.'">'.$statusMsg.'</p>':''; ?>
     <div class="container">
@@ -19,3 +23,4 @@ if(!empty($sessData['status']['msg'])){
             </form>
         </div>
     </div>
+</html>
