@@ -31,6 +31,60 @@ font-family: 'Ubuntu', sans-serif;
 }
 
 
+/*info page*/
+.info{
+  min-height: 400px;
+  background: #ffffff;
+  width: auto;
+  padding: 10px;
+  margin: 1px;
+}
+.info p{
+  width: 80%;
+  margin: 0px auto;
+  margin-bottom: 20px;
+}
+.info h1{
+  width: 80%;
+  margin: 0px auto;
+  margin-bottom: 20px;
+}
+.contact-card{
+  max-width: 80%;
+  margin: 0px auto;
+}
+.contact-card ul{
+  list-style: none;
+  margin: 0px auto;
+  padding: 0px;
+  display: inline-block;
+}
+.contact-card ul li{
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.contact-item{
+  width: 250px;
+  min-height: 250px;
+  box-shadow: 0px 0px 40px 10px #808080;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+.contact-item img{
+  width: 100px;
+  height: auto;
+  margin: 0px auto;
+}
+.contact-item p{
+  text-align: center;
+}
+.contact-item h1{
+  text-align: center;
+}
+/*end of info */
+
 
 /*Classes for UI Elements*/
 .button{
@@ -130,7 +184,7 @@ nav a {
   background-image: url(../images/dark-light-blur.jpg);
   background-size:cover;
   background-color: #000000; // Tint
-  background-blend-mode: multiply;
+background-blend-mode: multiply;
 }
 .imgText h1{
   opacity: 1;
