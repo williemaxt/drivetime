@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include 'users1.php';
 $user = new User();
@@ -33,59 +32,62 @@ if(isset($_POST['forgotSubmit1'])){
             $update = $user->update($data, $conditions);
 
             if($update){
-                $resetPassLink = 'http://localhost:8888/resetPassword1.php?fp_code='.$uniqidStr;
+                $resetPassLink = 'https://drivetimepro1.000webhostapp.com/resetPassword1.php?fp_code='.$uniqidStr;
 
                 //get user details
                 $con['where'] = array('email'=>$_POST['email']);
                 $con['return_type'] = 'single';
                 $userDetails = $user->getRows($con);
 
+//This below portion for mail must be edited.
 
-
-
-                /**
-                 * This example shows making an SMTP connection with authentication.
-                 */
-//Import the PHPMailer class into the global namespace
-
-//SMTP needs accurate times, and the PHP time zone MUST be set
-//This should be done in your php.ini, but this is how to do it if you don't have access to that
-                date_default_timezone_set('Etc/UTC');
-//Create a new PHPMailer instance
-                $mail = new PHPMailer(true);
-                try {
+$mail = new PHPMailer(true);
+try {
 //Tell PHPMailer to use SMTP
-                    $mail->isSMTP();
+// Do not touch this line below.
+    $mail->isSMTP();
 //Enable SMTP debugging
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
-                    $mail->SMTPDebug = 0;
+// In your case this will need to be set at 0. If it is already zero you can skip this line.
+    $mail->SMTPDebug = 0;
 //Set the hostname of the mail server
-                    $mail->Host = 'smtp.gmail.com';
+//If you are using gmail, leave it as is.
+    $mail->Host = 'smtp.gmail.com';
 //Set the SMTP port number - likely to be 25, 465 or 587
-                    $mail->Port = 587;
+//If you are using gmail, port 587 will suffice and you can leave this as is.
+    $mail->Port = 587;
 //Whether to use SMTP authentication
-                    $mail->SMTPAuth = true;
+//Do not edit the line below.
+    $mail->SMTPAuth = true;
 //Username to use for SMTP authentication
-                    $mail->Username = 'username';
+// Type in your email below in place of the example email placeholder. Make sure to leave the single quotes.
+    $mail->Username = 'drivetimedriver@gmail.com';
 //Password to use for SMTP authentication
-                    $mail->Password = 'password';
+// Enter your password to the email account below. Make sure to leave the single quotes.
+    $mail->Password = 's3cur1ty!!!';
 //Set who the message is to be sent from
-                    $mail->setFrom('email@email.com.com', 'ProDriveTime');
+//Set your email in the placeholder below. Leave the single quotes and make sure not to remove any code.
+//You can change the name that will show in the users email inbox. This should be a business tag. As in the example below.
+    $mail->setFrom('drivetimedriver@gmail.com', 'ProDriveTime');
 //Set an alternative reply-to address
-                    $mail->addReplyTo('email@email.com', 'ProDriveTime');
+//Repeat the same process as the last line of code. Email, business tag.
+    $mail->addReplyTo('drivetimedriver@gmail.com', 'ProDriveTime');
 //Set who the message is to be sent to
-                    $mail->addAddress($_POST['email']);
+// Do not change the code below. There is no need to change anything beyond this point.
+//There is nothing else that needs to be done on this page.
+
+    $mail->addAddress($_POST['email']);
 //Set the subject line
-                    $mail->Subject = 'PHPMailer SMTP test';
+    $mail->Subject = 'PHPMailer SMTP test';
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 //$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
 //Replace the plain text body with one created manually
 //$mail->AltBody = 'This is the body message of the php mail message.';
-                    $mail->isHTML(true);
-                    $mail->Body = "
+    $mail->isHTML(true);
+    $mail->Body = "
 	            Hi,<br><br>
 	            
 	            In order to reset your password, please click on the link below:<br>
@@ -144,7 +146,7 @@ if(isset($_POST['forgotSubmit1'])){
                     'forgot_pass_identity' => $fp_code
                 );
                 $data = array(
-                    //'password' => md5($_POST['password'])
+
                     'password' => password_hash($_POST['password'] , PASSWORD_DEFAULT)
                 );
                 $update = $user->update($data, $conditions);
@@ -171,8 +173,6 @@ if(isset($_POST['forgotSubmit1'])){
     header("Location:".$redirectURL);
 }
 
-
-
 require_once("connection.php");
 if(isset($_POST['submit'])){
     $email = trim($_POST['email']);
@@ -184,7 +184,7 @@ if(isset($_POST['submit'])){
     $numRows = mysqli_num_rows($rs);
     if($numRows  == 1){
         $row = mysqli_fetch_assoc($rs);
-        if(password_verify($password,$row['password'])){
+        if(password_verify($password, $row['password'])){
             header('Location: clientdash.php');
             exit();
         }
@@ -199,6 +199,7 @@ if(isset($_POST['submit'])){
 ?>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Client Login</title>
     <link rel="stylesheet" href="css/forms.css">
