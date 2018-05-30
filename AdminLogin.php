@@ -1,6 +1,7 @@
 <?php
-session_start();
-require_once("connection.php");
+
+include_once("connection.php");
+
 if(isset($_POST['submit'])){
     $email = trim($_POST['email']);
     //this saves our email address in the session
@@ -12,7 +13,7 @@ if(isset($_POST['submit'])){
     if($numRows  == 1){
         $row = mysqli_fetch_assoc($rs);
         if(password_verify($password,$row['password'])){
-            header('Location: Admindash.php');
+            header('Location: AdminDash.php');
             exit();
         }
         else{
@@ -23,9 +24,9 @@ if(isset($_POST['submit'])){
         echo "No User found";
     }
 }
+?>
+<?php
 
-//Built a function to log a users IP address.
-//Is later used to just display it on Admin login form.
 function getUserIpAddr(){
     if(!empty($_SERVER['HTTP_CLIENT_IP'])){
         //ip from share internet
@@ -43,6 +44,7 @@ function getUserIpAddr(){
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Admin Login</title>
     <link rel="stylesheet" href="css/forms.css">
@@ -52,9 +54,9 @@ function getUserIpAddr(){
 <form id="loginForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
     <h1>Admin Login</h1>
     <p>Email</p>
-    <input type="text" name="email" autocomplete="off" value="">
+    <input type="text" name="email" value="">
     <p>Password</p>
-    <input type="password" name="password" autocomplete="off" value="">
+    <input type="password" name="password" value="">
     <input type="submit" name="submit" value="Login" class="submitBtn">
     <?php echo 'Your IP is: '.getUserIpAddr().' and will be logged for security.'; ?>
     <a style="text-align:center;" href="forgotPassword.php"><p>Forgot Password?</p></a>
