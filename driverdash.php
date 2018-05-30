@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once 'connection.php';
 
 if(!isset($_SESSION))
@@ -210,6 +209,7 @@ if(isset($_POST['submitCdl'])) {
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>Drive Time</title>
     <link rel="stylesheet" href="css/dash.css">
@@ -235,7 +235,7 @@ if(isset($_POST['submitCdl'])) {
     <!--This section shows the clients account information-->
     <aside>
         <h1>My Account</h1>
-        <?php
+<?php
         if($result1->num_rows > 0){
             echo '
                 <p>Name: ' . $row1['name'] . '</p>
@@ -243,6 +243,8 @@ if(isset($_POST['submitCdl'])) {
                 <p>Phone: ' . $row1['number'] . '</p>
                 <p>State: ' . $row1['state'] . '</p>
                 <p>CDL Expiration: ' .$row1['cdl_expire'] . '</p>
+                <p>Medical Status: '. $row1['med_expire'] .'</p>
+                <p>Crash Report Status: '. $row1['crash_expire'] .'</p>
                 <p>Medical: <a href="driverDocs/' . $row1['medical'] . '" target="_blank">View</a></p>
                 <p>Crash Rep: <a href="driverDocs/' . $row1['crash_report'] . '" target="_blank">View</a></p>
                 <p>CDL: <a href="driverDocs/' . $row1['cdl'] . '" target="_blank">View</a></p>
@@ -252,8 +254,7 @@ if(isset($_POST['submitCdl'])) {
             echo 'We cant seem to pull your info';
         }
 
-
-     ?>
+?>
     </aside>
 
     <!-- The Modal For Account Info-->
@@ -274,16 +275,15 @@ if(isset($_POST['submitCdl'])) {
                 <p>Years of Experience</p>
                 <input type="number" name="experience">
                 <p>CDL Expiration Date</p>
-                <input type="date" name="cdl_expire">
+                <input type="date" name="cdl_expire" placeholder="0000-00-00">
+                <p>Medical Expiration Date</p>
+                <input type="date" name="med_expire" placeholder="0000-00-00">
+                <p>Crash Report Exp. Date</p>
+                <input type="date" name="crash_expire" placeholder="0000-00-00">
                 <p>Choose your license type</p>
-               
-                // Need to get names for the types of licenses.
-                // Replace Type A, Type B, Type C.
-                
-                <input type="checkbox" name="ids[]" value="Type A ">
-                <input type="checkbox" name="ids[]" value="Type B ">
-                <input type="checkbox" name="ids[]" value="Type C ">
-                
+                <input type="checkbox" name="ids[]" value="Type A "> Type A
+                <input type="checkbox" name="ids[]" value="Type B "> Type B
+                <input type="checkbox" name="ids[]" value="Type C "> Type C
                 <p>Current State</p>
                 <select name="state" id="state">
                     <option selected="selected">Select a State</option>
@@ -344,7 +344,7 @@ if(isset($_POST['submitCdl'])) {
             </form>
         </div>
     </div>
-    <?php
+<?php
 
     if(isset($_POST['submitDriverUpdate'])) {
 
@@ -354,14 +354,15 @@ if(isset($_POST['submitCdl'])) {
         $experience = $_POST['experience'];
         $state = $_POST['state'];
         $cdl_expire = $_POST['cdl_expire'];
-
+        $med_expire = $_POST['med_expire'];
+        $crash_expire = $_POST['crash_expire'];
         $ids = implode(",",$_POST["ids"]);
-        $conn->query("UPDATE `drivers` SET name = '$name', city = '$city', experience = '$experience', state = '$state', cdl_expire = '$cdl_expire', checkbox = '$ids' WHERE email = '$username';");
-        header('Location: '.$_SERVER['REQUEST_URI']);
+        
+        
+        $conn->query("UPDATE `drivers` SET name = '$name', city = '$city', experience = '$experience', state = '$state', cdl_expire = '$cdl_expire', med_expire = '$med_expire', crash_expire = '$crash_expire', checkbox = '$ids'  WHERE email = '$username';");
 
     }
-    ?>
-
+?>
     <!--End of modal-->
     <!-- The Modal The Modal For Account Info-->
     <div id="filesModal" class="modal">
@@ -389,7 +390,7 @@ if(isset($_POST['submitCdl'])) {
     <main>
         <h1>Your Requests</h1>
 
-        <?php
+<?php
         if ($result->num_rows > 0) {
             // output data of each row in the database and displays it as a card
 
@@ -428,14 +429,18 @@ if(isset($_POST['submitCdl'])) {
             $amount_offered = $_POST['amount_offered'];
             $id = $_POST['id'];
 
-            
             $conn->query("INSERT INTO transactions (client_email, client_name, business, details, amount_offered, driver_email) VALUES ('$client_email', '$client_name', '$business', '$details', '$amount_offered', '$username');");
             $conn->query("DELETE FROM request_trans WHERE id=$id");
             echo "<meta http-equiv='refresh' content='0'>";
             exit();
-            
+
+
         }
-        
+
+/**
+
+// This is code for judging whether or not a drivers'...
+// ...cdl license is expired or not.
 
 date_default_timezone_set('America/New_York');
 //$nextThursday = strtotime("next year, 2019-12-05");
@@ -456,14 +461,15 @@ if($days_remaining > 0) {
     echo "<h3 style='color: red'>Expired</h3>";
 
 }
-
+**/
 
 $conn->close();
-
 
 ?>
     </main>
 </div>
 </body>
 <script src="js/dash.js"></script>
+<script src="js/index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </html>
